@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Details | StreamSmart</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/colleges.css">
+</head>
+
+<body>
+
+    <nav class="navbar scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-graduation-cap"></i> StreamSmart
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="colleges.html" class="nav-link">Find Colleges</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="explorer-header" style="background: var(--color-white); border-bottom: 1px solid var(--color-border);">
+        <div class="container">
+            <span id="college-type-detail" class="college-type">Government Autonomous</span>
+            <h1 id="college-name-detail">College Name</h1>
+            <p id="college-loc-detail" style="font-size: 18px; color: var(--color-text-light);"><i
+                    class="fas fa-map-marker-alt"></i> Location</p>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 40px;">
+                <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: var(--shadow-sm);">
+                    <h3>Available Courses</h3>
+                    <ul id="college-courses-detail" style="list-style: disc; margin-left: 20px; margin-top: 20px;">
+                        <!-- Courses -->
+                    </ul>
+
+                    <h3 style="margin-top: 40px;">Streams Offered</h3>
+                    <div id="college-streams-detail" class="college-streams" style="margin-top: 15px;">
+                        <!-- Badges -->
+                    </div>
+
+                    <h3 style="margin-top: 40px;">Admission Process</h3>
+                    <p style="margin-top: 15px;">Admissions are typically through centralized state-level counseling
+                        (DPHE MP) based on Class 12 marks or entrance exams.</p>
+                </div>
+
+                <div
+                    style="background: #f8fafc; padding: 30px; border-radius: 12px; border: 1px solid var(--color-border); height: fit-content;">
+                    <h4 style="margin-bottom: 20px;">Quick Facts</h4>
+                    <p style="margin-bottom: 10px;"><strong>Approx Fees:</strong> <span
+                            id="college-fees-detail">--</span></p>
+                    <p style="margin-bottom: 10px;"><strong>Hostel Facility:</strong> Available</p>
+                    <p style="margin-bottom: 10px;"><strong>Placement Cell:</strong> Yes</p>
+                    <button id="btn-bookmark-college" class="btn btn-register"
+                        style="width: 100%; margin-top: 20px;">Bookmark College</button>
+                    <p style="font-size: 12px; text-align: center; margin-top: 15px; color: var(--color-text-light);">
+                        Registration is free</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-bottom" style="border: none;">
+            <p>&copy; 2026 StreamSmart. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="data/colleges.js"></script>
+    <script src="js/toast.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+            const college = collegesData.find(c => c.id === id);
+
+            if (college) {
+                document.getElementById('college-name-detail').textContent = college.name;
+                document.getElementById('college-type-detail').textContent = college.type;
+                document.getElementById('college-loc-detail').innerHTML = `<i class="fas fa-map-marker-alt"></i> ${college.location}`;
+                document.getElementById('college-fees-detail').textContent = college.fees;
+                document.getElementById('college-courses-detail').innerHTML = college.courses.map(c => `<li style="margin-bottom: 10px;">${c}</li>`).join('');
+                document.getElementById('college-streams-detail').innerHTML = college.streams.map(s => `<span class="stream-badge badge-${s.toLowerCase()}" style="font-size: 14px; padding: 5px 15px;">${s}</span>`).join('');
+
+                const btn = document.getElementById('btn-bookmark-college');
+                let saved = JSON.parse(localStorage.getItem('cp_saved_colleges') || '[]');
+                if (saved.includes(id)) {
+                    btn.textContent = 'Bookmarked!';
+                    btn.style.background = 'var(--color-primary)';
+                }
+
+                btn.onclick = () => {
+                    let saved = JSON.parse(localStorage.getItem('cp_saved_colleges') || '[]');
+                    if (!saved.includes(id)) {
+                        saved.push(id);
+                        localStorage.setItem('cp_saved_colleges', JSON.stringify(saved));
+                        btn.textContent = 'Bookmarked!';
+                        btn.style.background = 'var(--color-primary)';
+                        showToast('College added to bookmarks!', 'success');
+                    } else {
+                        saved = saved.filter(sid => sid !== id);
+                        localStorage.setItem('cp_saved_colleges', JSON.stringify(saved));
+                        btn.textContent = 'Bookmark College';
+                        btn.style.background = 'var(--color-secondary)';
+                        showToast('Removed from bookmarks', 'info');
+                    }
+                };
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Degree Details | StreamSmart</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/result.css">
+
+    <style>
+        .detail-hero {
+            background: #f8fafc;
+            padding: var(--spacing-xl) 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .content-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            margin-top: -50px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-graduation-cap"></i> StreamSmart
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="degrees.html" class="nav-link">Browse Degrees</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="detail-hero">
+        <div class="container">
+            <span id="detail-stream" class="stream-badge"
+                style="background: var(--color-primary); color: white; padding: 5px 15px; border-radius: 20px;">Stream</span>
+            <h1 id="detail-name" style="margin-top: 20px;">Degree Name</h1>
+            <p id="detail-meta" style="font-size: 18px; color: var(--color-text-light);"><i class="fas fa-clock"></i>
+                Duration | <i class="fas fa-money-bill-wave"></i> Salary</p>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="container">
+            <div class="content-card">
+                <h3>About this Degree</h3>
+                <p id="detail-desc" style="margin-top: 15px; font-size: 16px; line-height: 1.8;">Description goes
+                    here...</p>
+
+                <h3 style="margin-top: 40px;">Potential Career Roles</h3>
+                <div id="detail-careers" class="career-tags" style="margin-top: 15px;">
+                    <!-- Tags -->
+                </div>
+
+                <div
+                    style="margin-top: 50px; padding: 30px; background: #f1f5f9; border-radius: 12px; text-align: center;">
+                    <h3>Ready to take the first step?</h3>
+                    <p>Find the best government colleges offering this degree.</p>
+                    <a href="colleges.html" class="btn btn-register btn-large" style="margin-top: 20px;">Find
+                        Colleges</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-bottom" style="border: none;">
+            <p>&copy; 2026 StreamSmart. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="data/degrees.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+            const degree = degreesData.find(d => d.id === id);
+
+            if (degree) {
+                document.title = `${degree.name} | StreamSmart`;
+                document.getElementById('detail-name').textContent = degree.name;
+                document.getElementById('detail-stream').textContent = degree.stream.toUpperCase();
+                document.getElementById('detail-stream').style.background = `var(--color-${degree.stream})`;
+                document.getElementById('detail-meta').innerHTML = `<i class="fas fa-clock"></i> ${degree.duration} | <i class="fas fa-money-bill-wave"></i> ${degree.salary}`;
+                document.getElementById('detail-desc').textContent = degree.description;
+                document.getElementById('detail-careers').innerHTML = degree.careers.map(c => `<span class="career-tag" style="font-size: 16px; padding: 10px 20px; border: 1px solid var(--color-border);">${c}</span>`).join('');
+            } else {
+                window.location.href = 'degrees.html';
+            }
+        });
+    </script>
+</body>
+
+</html>
