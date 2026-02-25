@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreamSmart | Personalized Career Guidance for Students</title>
+    <meta name="description" content="A free, personalized career guidance platform for students after Class 10 and 12 in India. Explore streams, degrees, and colleges.">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/animations.css">
+    
+    <style>
+        /* Home Page Specific Styles */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+            display: flex;
+            align-items: center;
+            color: var(--color-white);
+            padding-top: 80px;
+        }
+        
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: var(--spacing-lg);
+            align-items: center;
+        }
+        
+        .hero h1 {
+            color: var(--color-white);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .hero p {
+            font-size: 18px;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .hero-btns {
+            display: flex;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .btn-large {
+            padding: 16px 32px;
+            font-size: 18px;
+            border-radius: var(--radius-md);
+        }
+        
+        .btn-white-outline {
+            border: 2px solid var(--color-white);
+            color: var(--color-white);
+            background: transparent;
+        }
+        
+        .btn-white-outline:hover {
+            background: var(--color-white);
+            color: var(--color-primary);
+        }
+        
+        .hero-small-text {
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .hero-img img {
+            width: 100%;
+            filter: drop-shadow(0 20px 50px rgba(0,0,0,0.3));
+        }
+
+        /* Problem Section */
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .problem-card {
+            background: var(--color-white);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: var(--transition);
+        }
+        
+        .problem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .problem-card span {
+            font-size: 32px;
+        }
+
+        /* How It Works */
+        .how-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-lg);
+            position: relative;
+        }
+        
+        .how-step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--color-white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: var(--color-secondary);
+            margin: 0 auto var(--spacing-md);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .step-num {
+            position: absolute;
+            top: 0;
+            right: calc(50% - 50px);
+            width: 30px;
+            height: 30px;
+            background: var(--color-primary);
+            color: var(--color-white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        /* Stream Preview */
+        .stream-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-md);
+        }
+        
+        .stream-card {
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            color: var(--color-white);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stream-science { background: var(--color-science); }
+        .stream-commerce { background: var(--color-commerce); }
+        .stream-arts { background: var(--color-arts); }
+        
+        /* Stats Strip */
+        .stats-strip {
+            background: var(--color-secondary);
+            padding: var(--spacing-lg) 0;
+            color: var(--color-white);
+            text-align: center;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+        
+        .stat-item h2 {
+            color: var(--color-white);
+            font-size: 42px;
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-grid, .how-grid, .problem-grid, .stream-grid, .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero { padding-top: 120px; text-align: center; }
+            .hero-btns { justify-content: center; flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-graduation-cap"></i> StreamSmart
+            </a>
+            
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="quiz.html" class="nav-link">Career Quiz</a>
+                <a href="degrees.html" class="nav-link">Explore Degrees</a>
+                <a href="roadmap.html" class="nav-link">Career Paths</a>
+                <a href="colleges.html" class="nav-link">Colleges</a>
+                <a href="compare.html" class="nav-link">Compare</a>
+            </div>
+            
+            <div class="nav-auth">
+                <a href="login.html" class="btn btn-login">Login</a>
+                <a href="register.html" class="btn btn-register">Register</a>
+            </div>
+            
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-content" data-aos="fade-right">
+                <h1>Don't just pick a stream.<br>Choose your future.</h1>
+                <p>A free, personalized career guidance platform for students after Class 10 and 12</p>
+                <div class="hero-btns">
+                    <a href="quiz.html" class="btn btn-register btn-large">Start Career Quiz</a>
+                    <a href="degrees.html" class="btn btn-white-outline btn-large">Explore Degrees</a>
+                </div>
+                <p class="hero-small-text">Free for all students. No login needed to explore.</p>
+            </div>
+            <div class="hero-img" data-aos="fade-left">
+                <!-- Use a generated placeholder or icon for now -->
+                <i class="fas fa-user-graduate fa-10x" style="color: rgba(255,255,255,0.2);"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROBLEM STATEMENT -->
+    <section class="section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: var(--spacing-lg);">Sound familiar?</h2>
+            <div class="problem-grid">
+                <div class="problem-card" data-aos="zoom-in">
+                    <span>😕</span>
+                    <p>"I don't know which stream to choose after Class 10"</p>
+                </div>
+                <div class="problem-card" data-aos="zoom-in" data-aos-delay="100">
+                    <span>🤔</span>
+                    <p>"Everyone says do a skill course, is a degree even worth it?"</p>
+                </div>
+                <div class="problem-card" data-aos="zoom-in" data-aos-delay="200">
+                    <span>😰</span>
+                    <p>"I don't know what careers come from Arts or Commerce"</p>
+                </div>
+                <div class="problem-card" data-aos="zoom-in" data-aos-delay="300">
+                    <span>😶</span>
+                    <p>"My parents want me to earn fast but I want to study"</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: var(--spacing-lg);">
+                <p style="font-weight: 600; margin-bottom: var(--spacing-md);">If you felt even one of these — this is built for you.</p>
+                <a href="quiz.html" class="btn btn-register btn-large">Get Free Guidance</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section" style="background: #f3f4f6;">
+        <div class="container text-center">
+            <h2 style="text-align: center; margin-bottom: var(--spacing-xl);">How It Works — 3 Simple Steps</h2>
+            <div class="how-grid">
+                <div class="how-step" data-aos="fade-up">
+                    <div class="step-icon"><i class="fas fa-clipboard-list"></i></div>
+                    <div class="step-num">1</div>
+                    <h3>Take the Quiz</h3>
+                    <p>Answer 12 questions about your interests and strengths.</p>
+                </div>
+                <div class="how-step" data-aos="fade-up" data-aos-delay="100">
+                    <div class="step-icon"><i class="fas fa-magic"></i></div>
+                    <div class="step-num">2</div>
+                    <h3>Get Recommendation</h3>
+                    <p>See your best-fit stream with a match percentage score.</p>
+                </div>
+                <div class="how-step" data-aos="fade-up" data-aos-delay="200">
+                    <div class="step-icon"><i class="fas fa-road"></i></div>
+                    <div class="step-num">3</div>
+                    <h3>Explore Your Path</h3>
+                    <p>Find matching degrees, career roadmaps, and colleges.</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: var(--spacing-xl);">
+                <a href="quiz.html" class="btn btn-register btn-large">Start Now — It's Free</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS STRIP -->
+    <section class="stats-strip">
+        <div class="container stats-grid">
+            <div class="stat-item">
+                <h2 class="counter">30</h2>
+                <p>Degrees</p>
+            </div>
+            <div class="stat-item">
+                <h2 class="counter">3</h2>
+                <p>Streams</p>
+            </div>
+            <div class="stat-item">
+                <h2 class="counter">50</h2>
+                <p>Career Paths</p>
+            </div>
+            <div class="stat-item">
+                <h2>100%</h2>
+                <p>Free</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-about">
+                <div class="logo"><i class="fas fa-graduation-cap"></i> StreamSmart</div>
+                <p>Helping Indian students make better career choices through data-driven guidance and honest advice.</p>
+            </div>
+            <div>
+                <h4 class="footer-heading">Quick Links</h4>
+                <div class="footer-links">
+                    <a href="index.html" class="footer-link">Home</a>
+                    <a href="quiz.html" class="footer-link">Career Quiz</a>
+                    <a href="degrees.html" class="footer-link">Explore Degrees</a>
+                </div>
+            </div>
+            <div>
+                <h4 class="footer-heading">Resources</h4>
+                <div class="footer-links">
+                    <a href="roadmap.html" class="footer-link">Career Roadmaps</a>
+                    <a href="compare.html" class="footer-link">Skill vs Degree</a>
+                    <a href="colleges.html" class="footer-link">Govt Colleges</a>
+                </div>
+            </div>
+            <div>
+                <h4 class="footer-heading">Contact</h4>
+                <div class="footer-links">
+                    <a href="mailto:info@streamsmart.in" class="footer-link">info@streamsmart.in</a>
+                    <a href="#" class="footer-link">+91 98765 43210</a>
+                </div>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 StreamSmart. All rights reserved.</p>
+            <p>Disclaimer: This is a guidance platform. Final decisions should be discussed with parents and teachers.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
