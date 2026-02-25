@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Quiz | StreamSmart</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/quiz.css">
+</head>
+
+<body class="quiz-page">
+
+    <header class="quiz-header">
+        <a href="index.html" class="logo">
+            <i class="fas fa-graduation-cap"></i> StreamSmart
+        </a>
+
+        <div class="progress-container">
+            <p id="progress-text" class="progress-text">Question 1 of 12</p>
+            <div class="progress-bar-bg">
+                <div id="progress-bar" class="progress-bar-fill"></div>
+            </div>
+        </div>
+
+        <a href="index.html" class="btn btn-exit" title="Exit Quiz">
+            <i class="fas fa-times"></i>
+        </a>
+    </header>
+
+    <main class="quiz-main">
+        <div id="question-container" class="question-container">
+            <h2 id="question-text" class="question-text">Which subject do you enjoy the most?</h2>
+
+            <div id="options-grid" class="options-grid">
+                <!-- Options will be injected by JS -->
+            </div>
+        </div>
+    </main>
+
+    <footer class="quiz-footer-nav"
+        style="background: var(--color-white); border-top: 1px solid var(--color-border); width: 100%;">
+        <div class="quiz-footer">
+            <button id="btn-back" class="btn btn-nav btn-back" style="display: none;">
+                <i class="fas fa-arrow-left"></i> Back
+            </button>
+            <div id="motto-text" class="motto-text">Focus and answer honestly!</div>
+            <button id="btn-next" class="btn btn-nav btn-next">
+                Next <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </footer>
+
+    <!-- Data and Script -->
+    <script src="data/quiz-questions.js"></script>
+    <script src="js/quiz.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Quiz Results | StreamSmart</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/result.css">
+</head>
+
+<body>
+
+    <nav class="navbar scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-graduation-cap"></i> StreamSmart
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="quiz.html" class="nav-link">Career Quiz</a>
+                <a href="degrees.html" class="nav-link">Explore Degrees</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="result-header">
+        <div class="container">
+            <h1>Discovery Complete!</h1>
+            <p>Based on your interests and strengths, here is your path.</p>
+        </div>
+    </header>
+
+    <section class="reveal-section">
+        <div class="result-card" data-aos="zoom-in">
+            <div class="match-circle">
+                <span id="match-percent" class="match-percent">--%</span>
+                <span class="match-label">Match</span>
+            </div>
+            <p>Your Recommended Stream is</p>
+            <h2 id="stream-name" class="recommended-stream">Loading...</h2>
+            <p id="stream-description">You have a strong affinity for logical reasoning, investigation, and
+                understanding the core principles of the world.</p>
+            <div style="margin-top: 30px;">
+                <a href="#path-details" class="btn btn-register btn-large">See My Full Career Path</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="path-details" class="breakdown-section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: var(--spacing-lg);">Stream Breakdown</h2>
+            <div class="score-bars" style="max-width: 800px; margin: 0 auto;">
+
+                <div class="score-bar-container">
+                    <div class="score-bar-header">
+                        <span>Science</span>
+                        <span id="val-science">0%</span>
+                    </div>
+                    <div class="score-bar-bg">
+                        <div id="bar-science" class="score-bar-fill fill-science"></div>
+                    </div>
+                </div>
+
+                <div class="score-bar-container">
+                    <div class="score-bar-header">
+                        <span>Commerce</span>
+                        <span id="val-commerce">0%</span>
+                    </div>
+                    <div class="score-bar-bg">
+                        <div id="bar-commerce" class="score-bar-fill fill-commerce"></div>
+                    </div>
+                </div>
+
+                <div class="score-bar-container">
+                    <div class="score-bar-header">
+                        <span>Arts & Humanities</span>
+                        <span id="val-arts">0%</span>
+                    </div>
+                    <div class="score-bar-bg">
+                        <div id="bar-arts" class="score-bar-fill fill-arts"></div>
+                    </div>
+                </div>
+
+                <p style="text-align: center; font-size: 14px; margin-top: 20px; color: var(--color-text-light);">
+                    Note: You can still choose any stream. This is guidance based on your quiz answers.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="background: white;">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: var(--spacing-lg);">Degrees You Should Explore</h2>
+            <div id="degree-grid" class="degree-grid">
+                <!-- Degrees will be injected by JS -->
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="background: #f8fafc; text-align: center;">
+        <div class="container">
+            <h2>Take the Next Step</h2>
+            <div style="display: flex; gap: 15px; justify-content: center; margin-top: 30px;">
+                <button id="btn-save-result" class="btn btn-login btn-large">Save My Result</button>
+                <button id="btn-share-whatsapp" class="btn btn-register btn-large">Share with Parents <i
+                        class="fab fa-whatsapp"></i></button>
+                <a href="quiz.html" class="btn btn-white-outline btn-large"
+                    style="color: var(--color-primary); border-color: var(--color-primary);">Retake Quiz</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-bottom" style="border: none;">
+            <p>&copy; 2026 StreamSmart. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="data/degrees.js"></script>
+    <script src="js/result.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+
+</html>
