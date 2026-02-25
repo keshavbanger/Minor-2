@@ -1,0 +1,36 @@
+[data-theme="dark"] {
+    --color-primary: #4A90E2;
+    --color-secondary: #5C6BC0;
+    --color-bg: #0F172A;
+    --color-white: #1E293B;
+    --color-text: #F8FAFC;
+    --color-text-light: #94A3B8;
+    --color-border: #334155;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] body {
+    background-color: var(--color-bg);
+}
+
+[data-theme="dark"] .navbar {
+    background: rgba(30, 41, 59, 0.95);
+    border-bottom: 1px solid var(--color-border);
+}
+
+[data-theme="dark"] .card,
+[data-theme="dark"] .degree-card,
+[data-theme="dark"] .exam-card,
+[data-theme="dark"] .scholar-card {
+    background: var(--color-white);
+    border-color: var(--color-border);
+}
+
+[data-theme="dark"] input,
+[data-theme="dark"] select,
+[data-theme="dark"] textarea {
+    background: #0F172A;
+    border-color: var(--color-border);
+    color: white;
+}
