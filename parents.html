@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parents' Corner | StreamSmart</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/footer.css">
+
+    <style>
+        .myth-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .myth-card {
+            perspective: 1000px;
+            height: 250px;
+            cursor: pointer;
+        }
+
+        .myth-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .myth-card:hover .myth-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .myth-front,
+        .myth-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .myth-front {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .myth-back {
+            background: #dcfce7;
+            color: #166534;
+            transform: rotateY(180deg);
+        }
+
+        .advice-list {
+            margin-top: 60px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .advice-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            border-top: 5px solid var(--color-primary);
+            box-shadow: var(--shadow-sm);
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-graduation-cap"></i> StreamSmart
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="quiz.html" class="nav-link">Quiz</a>
+                <a href="parents.html" class="nav-link active">Parents' Corner</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="explorer-header" style="background: var(--color-primary); color: white; text-align: center;">
+        <div class="container">
+            <h1 style="color: white; margin-bottom: 20px;">Your Child's Future - Let's Decide Together</h1>
+            <p style="opacity: 0.9;">Guidance for parents to help their children choose the right path with confidence.
+            </p>
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="container">
+            <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+                <h2>Myth vs. Fact</h2>
+                <p>Hover or tap on the cards below to see the reality behind common career misconceptions.</p>
+            </div>
+
+            <div class="myth-grid">
+                <div class="myth-card">
+                    <div class="myth-card-inner">
+                        <div class="myth-front">
+                            <i class="fas fa-exclamation-triangle fa-2x mb-15"></i>
+                            <h3>Arts is for students who fail in Science.</h3>
+                        </div>
+                        <div class="myth-back">
+                            <h3>THE FACT</h3>
+                            <p>Arts leads to roles like IAS Officers, Lawyers, and Economists. It's about interest, not
+                                intelligence.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="myth-card">
+                    <div class="myth-card-inner">
+                        <div class="myth-front">
+                            <i class="fas fa-exclamation-triangle fa-2x mb-15"></i>
+                            <h3>Only Engineering and Medical have high salaries.</h3>
+                        </div>
+                        <div class="myth-back">
+                            <h3>THE FACT</h3>
+                            <p>Data Scientists, Actuaries (Commerce), and Design Experts often earn more than average
+                                doctors/engineers.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="myth-card">
+                    <div class="myth-card-inner">
+                        <div class="myth-front">
+                            <i class="fas fa-exclamation-triangle fa-2x mb-15"></i>
+                            <h3>Government colleges are lower quality.</h3>
+                        </div>
+                        <div class="myth-back">
+                            <h3>THE FACT</h3>
+                            <p>Govt colleges have the most experienced faculty and degrees recognized by all central
+                                departments.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="advice-list">
+                <div class="advice-card">
+                    <h4>Listen First</h4>
+                    <p style="font-size: 14px; margin-top: 10px;">Understand your child's interests before suggesting a
+                        stream. Pressuring them leads to burnout.</p>
+                </div>
+                <div class="advice-card">
+                    <h4>Don't Compare</h4>
+                    <p style="font-size: 14px; margin-top: 10px;">Every child is unique. Just because the neighbor's
+                        child is an engineer doesn't mean yours should be too.</p>
+                </div>
+                <div class="advice-card">
+                    <h4>Explore Costs</h4>
+                    <p style="font-size: 14px; margin-top: 10px;">A 3-year government degree costs 1/10th of a private
+                        skill course and offers much higher job security.</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 80px; background: #f8fafc; padding: 50px; border-radius: 20px; text-align: center;">
+                <h3>"Our vision is an India where no student stays back because they didn't know the right path."</h3>
+                <button class="btn btn-register btn-large" style="margin-top: 30px;"><i class="fas fa-file-download"
+                        style="margin-right: 10px;"></i> Download Parent's Guide PDF</button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-bottom" style="border: none;">
+            <p>&copy; 2026 StreamSmart. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

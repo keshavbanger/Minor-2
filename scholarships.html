@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scholarship Finder | StreamSmart</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/degrees.css">
+
+    <style>
+        .scholarship-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 25px;
+        }
+
+        .scholar-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--color-border);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .scholar-type {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            background: #f1f5f9;
+            border-radius: 4px;
+        }
+
+        .scholar-amount {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--color-success);
+            margin: 15px 0;
+        }
+
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            font-size: 12px;
+            background: #eef2ff;
+            color: var(--color-primary);
+            padding: 2px 10px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-graduation-cap"></i> StreamSmart
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="exams.html" class="nav-link">Entrance Exams</a>
+                <a href="scholarships.html" class="nav-link active">Scholarships</a>
+                <a href="parents.html" class="nav-link">Parents' Corner</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="explorer-header">
+        <div class="container">
+            <h1>Scholarship Finder</h1>
+            <p>Don't let money stop your dreams. Explore government and private scholarships for 2026.</p>
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="container">
+            <div id="scholarship-list" class="scholarship-grid">
+                <!-- Data will be injected -->
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-bottom" style="border: none;">
+            <p>&copy; 2026 StreamSmart. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/api.js"></script>
+    <script>
+        async function loadScholarships() {
+            const list = document.getElementById('scholarship-list');
+            let data = [];
+
+            try {
+                const response = await fetch('http://localhost:8080/api/v1/scholarships');
+                if (response.ok) data = await response.json();
+                else throw new Error();
+            } catch (e) {
+                data = [
+                    { name: 'PM Scholarship for CAPF', type: 'Merit', provider: 'Central Govt', amount: '₹30,000/yr', tags: ['Class 12', 'All Streams'] },
+                    { name: 'MP Medhavi Chhatra Yojana', type: 'Merit', provider: 'MP Govt', amount: 'Full College Fee', tags: ['85%+ Marks', 'MP Domicile'] },
+                    { name: 'INSPIRE Scholarship', type: 'Merit', provider: 'DST', amount: '₹80,000/yr', tags: ['Science', 'Top 1%'] },
+                    { name: 'Aga Khan Foundation', type: 'Need-based', provider: 'NGO', amount: 'Variable', tags: ['PG Overseas', 'Post-Grad'] }
+                ];
+            }
+
+            list.innerHTML = data.map(s => `
+                <div class="scholar-card">
+                    <span class="scholar-type">${s.type}</span>
+                    <h3 style="padding-right: 60px;">${s.name}</h3>
+                    <p style="font-size: 14px; color: var(--color-text-light); margin-top: 5px;">${s.provider}</p>
+                    <div class="scholar-amount">${s.amount}</div>
+                    <div class="tag-row">
+                        ${(s.tags || []).map(t => `<span class="tag">${t}</span>`).join('')}
+                    </div>
+                    <div style="margin-top: auto; display: flex; gap: 10px;">
+                        <button class="btn btn-register" style="flex: 1; font-size: 13px;">View Details</button>
+                        <button class="btn btn-login" style="flex: 1; font-size: 13px;">Apply Now <i class="fas fa-external-link-alt" style="margin-left: 5px; font-size: 10px;"></i></button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        loadScholarships();
+    </script>
+</body>
+
+</html>

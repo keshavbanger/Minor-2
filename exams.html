@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrance Exam Tracker | StreamSmart</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/degrees.css">
+
+    <style>
+        .exam-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+            gap: 25px;
+        }
+
+        .exam-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--color-border);
+            transition: var(--transition);
+        }
+
+        .exam-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .exam-strip {
+            height: 6px;
+        }
+
+        .exam-content {
+            padding: 25px;
+        }
+
+        .exam-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-open {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-upcoming {
+            background: #e0f2fe;
+            color: #075985;
+        }
+
+        .status-closed {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        @media (max-width: 768px) {
+            .exam-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-graduation-cap"></i> StreamSmart
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="exams.html" class="nav-link active">Entrance Exams</a>
+                <a href="scholarships.html" class="nav-link">Scholarships</a>
+                <a href="colleges.html" class="nav-link">Colleges</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="explorer-header">
+        <div class="container">
+            <h1>Entrance Exam Tracker</h1>
+            <p>Stay updated with application deadlines and exam dates for 2026-27.</p>
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="container">
+            <div id="exam-list" class="exam-grid">
+                <!-- Data will be injected -->
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-bottom" style="border: none;">
+            <p>&copy; 2026 StreamSmart. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="data/entrance-exams.js"></script> <!-- Fallback data -->
+    <script src="js/api.js"></script>
+    <script>
+        async function loadExams() {
+            const list = document.getElementById('exam-list');
+            let data = [];
+
+            try {
+                // Try to fetch from API
+                const response = await fetch('http://localhost:8080/api/v1/exams');
+                if (response.ok) data = await response.json();
+                else throw new Error();
+            } catch (e) {
+                // Fallback to local data
+                data = [
+                    { name: 'JEE Main', shortName: 'JEE Main', body: 'NTA', stream: 'science', start: 'Nov 2025', end: 'Dec 2025', date: 'Jan 20, 2026', status: 'Upcoming', fee: '₹650' },
+                    { name: 'NEET UG', shortName: 'NEET UG', body: 'NTA', stream: 'science', start: 'Feb 9, 2026', end: 'Mar 9, 2026', date: 'May 4, 2026', status: 'Open', fee: '₹1700' },
+                    { name: 'CUET UG', shortName: 'CUET UG', body: 'NTA', stream: 'all', start: 'Feb 20, 2026', end: 'Mar 26, 2026', date: 'May 15, 2026', status: 'Upcoming', fee: '₹650' },
+                    { name: 'CLAT', shortName: 'CLAT', body: 'Consortium', stream: 'arts', start: 'Closed', end: 'Closed', date: 'Dec 1, 2025', status: 'Closed', fee: '₹4000' }
+                ];
+            }
+
+            list.innerHTML = data.map(exam => `
+                <div class="exam-card">
+                    <div class="exam-strip" style="background: var(--color-${exam.stream || 'primary'})"></div>
+                    <div class="exam-content">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
+                            <div>
+                                <span class="exam-badge status-${exam.status.toLowerCase()}">${exam.status}</span>
+                                <h3 style="margin-top: 10px;">${exam.shortName}</h3>
+                                <p style="font-size: 13px; color: var(--color-text-light);">${exam.body || 'National Testing Agency'}</p>
+                            </div>
+                            <div style="text-align: right;">
+                                <p style="font-weight: 700; color: var(--color-success);">${exam.fee}</p>
+                            </div>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; font-size: 14px;">
+                            <div><i class="fas fa-calendar-plus" style="margin-right: 8px;"></i> Starts: ${exam.start}</div>
+                            <div><i class="fas fa-calendar-check" style="margin-right: 8px;"></i> Ends: ${exam.end}</div>
+                            <div style="font-weight: 600; color: var(--color-primary);"><i class="fas fa-edit" style="margin-right: 8px;"></i> Exam: ${exam.date}</div>
+                            <div><i class="fas fa-poll" style="margin-right: 8px;"></i> Result: June 2026</div>
+                        </div>
+
+                        <div style="display: flex; gap: 10px; margin-top: 25px;">
+                            <a href="#" class="btn btn-register" style="flex: 1; font-size: 13px;">View Details</a>
+                            <a href="#" class="btn btn-login" style="flex: 1; font-size: 13px;">Official Link <i class="fas fa-external-link-alt" style="margin-left: 5px; font-size: 10px;"></i></a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        loadExams();
+    </script>
+</body>
+
+</html>
