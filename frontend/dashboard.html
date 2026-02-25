@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dashboard | StreamSmart</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/result.css">
+</head>
+
+<body>
+
+    <nav class="navbar scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-graduation-cap"></i> StreamSmart
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="quiz.html" class="nav-link">Career Quiz</a>
+                <a href="degrees.html" class="nav-link">Explore Degrees</a>
+            </div>
+            <button onclick="handleLogout()" class="btn btn-login"
+                style="border-color: #e74c3c; color: #e74c3c;">Logout</button>
+        </div>
+    </nav>
+
+    <div class="dashboard-layout">
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-menu">
+                <a href="#" class="sidebar-link active"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="quiz.html" class="sidebar-link"><i class="fas fa-redo"></i> Retake Quiz</a>
+                <a href="degrees.html" class="sidebar-link"><i class="fas fa-book"></i> Browse Degrees</a>
+                <a href="colleges.html" class="sidebar-link"><i class="fas fa-university"></i> Find Colleges</a>
+                <a href="#" class="sidebar-link"><i class="fas fa-cog"></i> Settings</a>
+            </div>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="welcome-banner">
+                <div>
+                    <h1>Welcome back, <span id="user-name">Rahul</span>!</h1>
+                    <p>You're on the right path to your dream career.</p>
+                </div>
+                <div class="banner-icon">
+                    <i class="fas fa-rocket fa-4x" style="opacity: 0.2;"></i>
+                </div>
+            </div>
+
+            <div class="stat-row">
+                <div class="stat-card">
+                    <h2 id="top-stream-label">None</h2>
+                    <p>Strongest Stream</p>
+                </div>
+                <div class="stat-card">
+                    <h2 id="count-degrees">0</h2>
+                    <p>Saved Degrees</p>
+                </div>
+                <div class="stat-card">
+                    <h2 id="count-colleges">0</h2>
+                    <p>Saved Colleges</p>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-lg);">
+                <div class="dashboard-section"
+                    style="background: white; padding: 25px; border-radius: 12px; box-shadow: var(--shadow-sm);">
+                    <h3 style="margin-bottom: 20px;">My Bookmarked Degrees</h3>
+                    <div id="saved-degrees-list">
+                        <!-- Injected by JS -->
+                    </div>
+                </div>
+
+                <div class="dashboard-section"
+                    style="background: white; padding: 25px; border-radius: 12px; box-shadow: var(--shadow-sm);">
+                    <h3 style="margin-bottom: 20px;">Recommended for You</h3>
+                    <p style="font-size: 14px; color: var(--color-text-light);">Based on your quiz result mapping.</p>
+                    <div style="margin-top: 20px;">
+                        <a href="result.html" class="btn btn-register" style="width: 100%;">View Full Recommendation</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="data/degrees.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+
+</html>
