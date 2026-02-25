@@ -1,0 +1,105 @@
+.compare-table-container {
+    width: 100%;
+    overflow-x: auto;
+    margin: var(--spacing-lg) 0;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    background: var(--color-white);
+}
+
+.compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+.compare-table th,
+.compare-table td {
+    padding: 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.compare-table th {
+    background: var(--color-primary);
+    color: var(--color-white);
+    font-weight: 600;
+}
+
+.compare-table tr:last-child td {
+    border-bottom: none;
+}
+
+.factor-cell {
+    font-weight: 600;
+    background: #f8fafc;
+    width: 250px;
+}
+
+.check-green {
+    color: var(--color-success);
+    font-size: 20px;
+}
+
+.cross-red {
+    color: #E74C3C;
+    font-size: 20px;
+}
+
+.story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    margin: var(--spacing-xl) 0;
+}
+
+.story-card {
+    background: var(--color-white);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    border-left: 6px solid var(--color-primary);
+}
+
+.story-card.accent {
+    border-left-color: var(--color-secondary);
+}
+
+.faq-section {
+    max-width: 800px;
+    margin: var(--spacing-xl) auto;
+}
+
+.faq-item {
+    margin-bottom: 15px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.faq-question {
+    padding: 15px 20px;
+    background: var(--color-white);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+}
+
+.faq-answer {
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    background: #f9fafb;
+}
+
+.faq-item.active .faq-answer {
+    padding: 15px 20px;
+    max-height: 500px;
+}
+
+.faq-item.active .faq-question i {
+    transform: rotate(180deg);
+}

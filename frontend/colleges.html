@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Colleges | StreamSmart</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/degrees.css"> <!-- Reusing filters wrapper -->
+    <link rel="stylesheet" href="css/colleges.css">
+</head>
+
+<body>
+
+    <nav class="navbar scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-graduation-cap"></i> StreamSmart
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="quiz.html" class="nav-link">Career Quiz</a>
+                <a href="degrees.html" class="nav-link">Explore Degrees</a>
+                <a href="roadmap.html" class="nav-link">Career Paths</a>
+                <a href="colleges.html" class="nav-link">Colleges</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="explorer-header">
+        <div class="container">
+            <h1>Government Degree Colleges</h1>
+            <p>Find affordable, high-quality education in Madhya Pradesh and surrounding states.</p>
+        </div>
+    </header>
+
+    <div class="filter-bar">
+        <div class="container filter-container">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="college-search" placeholder="Search college name or location...">
+            </div>
+
+            <select id="stream-filter" class="filter-select">
+                <option value="all">All Streams</option>
+                <option value="Science">Science</option>
+                <option value="Commerce">Commerce</option>
+                <option value="Arts">Arts</option>
+            </select>
+
+            <select id="district-filter" class="filter-select">
+                <option value="all">All Districts</option>
+                <option value="Bhopal">Bhopal</option>
+                <option value="Indore">Indore</option>
+                <option value="Gwalior">Gwalior</option>
+                <option value="Jabalpur">Jabalpur</option>
+                <option value="Ujjain">Ujjain</option>
+                <option value="Sagar">Sagar</option>
+                <option value="Rewa">Rewa</option>
+            </select>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="container">
+            <p id="college-count" class="results-info">Showing -- Government Colleges</p>
+            <div id="college-grid" class="college-grid">
+                <!-- Data will be injected -->
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-bottom" style="border: none;">
+            <p>&copy; 2026 StreamSmart. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="data/colleges.js"></script>
+    <script src="js/colleges.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+
+</html>
