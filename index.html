@@ -26,202 +26,171 @@
     <link rel="stylesheet" href="css/chatbot.css">
 
     <style>
-        /* Home Page Specific Styles */
-        .hero {
+        /* Modern Startup Hero Base */
+        .hero-modern {
+            position: relative;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             min-height: 100vh;
-            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
             display: flex;
             align-items: center;
-            color: var(--color-white);
+            color: white;
+            overflow: hidden;
             padding-top: 80px;
+        }
+
+        .hero-modern .container {
+            position: relative;
+            z-index: 10;
         }
 
         .hero-grid {
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: var(--spacing-lg);
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 60px;
             align-items: center;
         }
 
-        .hero h1 {
-            color: var(--color-white);
-            margin-bottom: var(--spacing-md);
+        .text-gradient {
+            background: linear-gradient(to right, #ff7a3d, #ffcf87, #ff7a3d);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: moveGradient 3s linear infinite;
+            font-weight: 800;
         }
 
-        .hero p {
-            font-size: 18px;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: var(--spacing-lg);
+        @keyframes moveGradient {
+            0% {
+                background-position: 0% center;
+            }
+
+            100% {
+                background-position: 200% center;
+            }
         }
 
-        .hero-btns {
-            display: flex;
-            gap: var(--spacing-sm);
-            margin-bottom: var(--spacing-sm);
+        .hero-content-modern h1 {
+            font-size: clamp(40px, 6vw, 64px);
+            line-height: 1.1;
+            margin-bottom: 25px;
+            letter-spacing: -0.02em;
         }
 
-        .btn-large {
-            padding: 16px 32px;
-            font-size: 18px;
-            border-radius: var(--radius-md);
+        .hero-content-modern p {
+            font-size: 19px;
+            color: #94a3b8;
+            margin-bottom: 45px;
+            max-width: 560px;
+            line-height: 1.6;
         }
 
-        .btn-white-outline {
-            border: 2px solid var(--color-white);
-            color: var(--color-white);
-            background: transparent;
-        }
-
-        .btn-white-outline:hover {
-            background: var(--color-white);
-            color: var(--color-primary);
-        }
-
-        .hero-small-text {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .hero-img img {
-            width: 100%;
-            filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.3));
-        }
-
-        /* Problem Section */
-        .problem-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: var(--spacing-md);
-            margin: var(--spacing-lg) 0;
-        }
-
-        .problem-card {
-            background: var(--color-white);
-            padding: var(--spacing-md);
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-sm);
+        /* Glass Cards Base Styles */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 24px;
             display: flex;
             align-items: center;
             gap: 15px;
-            transition: var(--transition);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .problem-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-md);
+        .glass-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(255, 255, 255, 0.2);
         }
 
-        .problem-card span {
-            font-size: 32px;
+        /* Animations Utilities */
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
         }
 
-        /* How It Works */
-        .how-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--spacing-lg);
-            position: relative;
+        .animate-slide-up {
+            opacity: 0;
+            animation: slideUp 0.8s ease-out forwards;
         }
 
-        .how-step {
-            text-align: center;
-            position: relative;
-            z-index: 2;
+        .animate-float-in {
+            animation: floatIn 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
         }
 
-        .step-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--color-white);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            color: var(--color-secondary);
-            margin: 0 auto var(--spacing-md);
-            box-shadow: var(--shadow-md);
+        .delay-1 {
+            animation-delay: 0.2s;
         }
 
-        .step-num {
-            position: absolute;
-            top: 0;
-            right: calc(50% - 50px);
-            width: 30px;
-            height: 30px;
-            background: var(--color-primary);
-            color: var(--color-white);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
+        .delay-2 {
+            animation-delay: 0.4s;
         }
 
-        /* Stream Preview */
-        .stream-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--spacing-md);
+        .delay-3 {
+            animation-delay: 0.6s;
         }
 
-        .stream-card {
-            padding: var(--spacing-lg);
-            border-radius: var(--radius-lg);
-            color: var(--color-white);
-            position: relative;
-            overflow: hidden;
+        .delay-4 {
+            animation-delay: 0.8s;
         }
 
-        .stream-science {
-            background: var(--color-science);
-        }
-
-        .stream-commerce {
-            background: var(--color-commerce);
-        }
-
-        .stream-arts {
-            background: var(--color-arts);
-        }
-
-        /* Stats Strip */
-        .stats-strip {
-            background: var(--color-secondary);
-            padding: var(--spacing-lg) 0;
-            color: var(--color-white);
-            text-align: center;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-        }
-
-        .stat-item h2 {
-            color: var(--color-white);
-            font-size: 42px;
-            margin-bottom: 5px;
-        }
-
-        @media (max-width: 768px) {
-
-            .hero-grid,
-            .how-grid,
-            .problem-grid,
-            .stream-grid,
-            .stats-grid {
-                grid-template-columns: 1fr;
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
             }
 
-            .hero {
-                padding-top: 120px;
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes floatIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @media (max-width: 991px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
                 text-align: center;
             }
 
-            .hero-btns {
+            .hero-content-modern p {
+                margin: 0 auto 40px;
+            }
+
+            .hero-btns-modern {
                 justify-content: center;
-                flex-direction: column;
+            }
+
+            .hero-trust {
+                justify-content: center;
+            }
+
+            .hero-visual-modern {
+                height: 400px;
+                margin-top: 40px;
             }
         }
     </style>
@@ -258,21 +227,110 @@
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
-    <section class="hero">
+    <!-- MODERN STARTUP HERO SECTION -->
+    <section class="hero-modern" id="home">
+        <!-- Decorative Background Elements -->
+        <div class="hero-bg-grid"></div>
+        <div class="glow-shape glow-1"></div>
+        <div class="glow-shape glow-2"></div>
+        <div class="glow-shape glow-3"></div>
+
+        <!-- Floating Modern Shapes -->
+        <div class="floating-elements">
+            <div class="shape s1"><i class="fas fa-plus"></i></div>
+            <div class="shape s2"></div>
+            <div class="shape s3"><i class="fas fa-circle"></i></div>
+            <div class="shape s4"></div>
+            <div class="shape s5"></div>
+        </div>
+
         <div class="container hero-grid">
-            <div class="hero-content" data-aos="fade-right">
-                <h1>Don't just pick a stream.<br>Choose your future.</h1>
-                <p>A free, personalized career guidance platform for students after Class 10 and 12</p>
-                <div class="hero-btns">
-                    <a href="quiz.html" class="btn btn-register btn-large">Start Career Quiz</a>
-                    <a href="degrees.html" class="btn btn-white-outline btn-large">Explore Degrees</a>
+            <div class="hero-content-modern">
+                <div class="badge-modern animate-fade-in">✨ Future-Proof Your Career</div>
+                <h1 class="animate-slide-up">Your Future Isn’t a Stream.<br><span class="text-gradient">It’s a
+                        Direction.</span></h1>
+                <p class="animate-slide-up delay-1">Free personalized career guidance for students after Class 10 and
+                    12. Join 50,000+ students making smarter choices.</p>
+
+                <div class="hero-btns-modern animate-slide-up delay-2">
+                    <a href="quiz.html" class="btn-primary-modern">Start Career Quiz</a>
+                    <a href="degrees.html" class="btn-secondary-modern">Explore Degrees</a>
                 </div>
-                <p class="hero-small-text">Free for all students. No login needed to explore.</p>
+
+                <div class="hero-trust animate-fade-in delay-3">
+                    <div class="trust-item"><i class="fas fa-check-circle"></i> 100% Free</div>
+                    <div class="trust-item"><i class="fas fa-check-circle"></i> No Login Required</div>
+                    <div class="trust-item"><i class="fas fa-check-circle"></i> AI-Powered Insights</div>
+                </div>
             </div>
-            <div class="hero-img" data-aos="fade-left">
-                <!-- Use a generated placeholder or icon for now -->
-                <i class="fas fa-user-graduate fa-10x" style="color: rgba(255,255,255,0.2);"></i>
+
+            <div class="hero-visual-modern animate-float-in">
+                <!-- Glassmorphism Cards -->
+                <div class="glass-card card-eng">
+                    <div class="glass-icon">⚙️</div>
+                    <div class="glass-content">
+                        <span>Engineering</span>
+                        <div class="glass-progress" style="width: 85%"></div>
+                    </div>
+                </div>
+                <div class="glass-card card-des">
+                    <div class="glass-icon">🎨</div>
+                    <div class="glass-content">
+                        <span>Design</span>
+                        <div class="glass-progress" style="width: 70%"></div>
+                    </div>
+                </div>
+                <div class="glass-card card-med">
+                    <div class="glass-icon">🩺</div>
+                    <div class="glass-content">
+                        <span>Medical</span>
+                        <div class="glass-progress" style="width: 60%"></div>
+                    </div>
+                </div>
+                <div class="glass-card card-biz">
+                    <div class="glass-icon">📊</div>
+                    <div class="glass-content">
+                        <span>Business</span>
+                        <div class="glass-progress" style="width: 75%"></div>
+                    </div>
+                </div>
+
+                <!-- Center Decoration -->
+                <div class="visual-center">
+                    <div class="pulse-ring"></div>
+                    <div class="center-icon">🚀</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Down Indicator -->
+        <div class="scroll-indicator animate-fade-in delay-3">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <span style="font-size: 10px; text-transform: uppercase; letter-spacing: 1px;">Scroll</span>
+        </div>
+
+        <!-- Hero Bottom Trust Marquee -->
+        <div class="hero-marquee animate-fade-in delay-3">
+            <p>Trusted by students from leading institutions:</p>
+            <div class="marquee-content">
+                <span>KV Bhopal</span>
+                <span>DPS Indore</span>
+                <span>Sagar Public School</span>
+                <span>Mount Carmel</span>
+                <span>St. Joseph's</span>
+                <span>Jawahar Navodaya</span>
+                <span>Carmel Convent</span>
+                <span>Sharda Vidya Mandir</span>
+                <span>All Saints School</span>
+                <span>Billabong High</span>
+                <!-- Duplicate for seamless loop -->
+                <span>KV Bhopal</span>
+                <span>DPS Indore</span>
+                <span>Sagar Public School</span>
+                <span>Mount Carmel</span>
+                <span>St. Joseph's</span>
             </div>
         </div>
     </section>
@@ -341,19 +399,19 @@
     <section class="stats-strip">
         <div class="container stats-grid">
             <div class="stat-item">
-                <h2 class="counter">30</h2>
+                <h2 class="counter" data-target="30">0</h2><span>+</span>
                 <p>Degrees</p>
             </div>
             <div class="stat-item">
-                <h2 class="counter">3</h2>
+                <h2 class="counter" data-target="3">0</h2><span>+</span>
                 <p>Streams</p>
             </div>
             <div class="stat-item">
-                <h2 class="counter">50</h2>
+                <h2 class="counter" data-target="50">0</h2><span>+</span>
                 <p>Career Paths</p>
             </div>
             <div class="stat-item">
-                <h2>100%</h2>
+                <h2 class="counter" data-target="100">0</h2><span>%</span>
                 <p>Free</p>
             </div>
         </div>
@@ -416,7 +474,89 @@
             }
         });
     </script>
-    <!-- Chatbot Scripts -->
+    <script src="js/hero-effects.js"></script>
+
+    <!-- 
+  STREAMSMART: MARG CHATBOT WIDGET SNIPPET
+  Paste this before </body> on every page. 
+-->
+    <div id="marg-chatbot-container">
+        <!-- Chat Bubble -->
+        <button id="chat-bubble" class="chat-bubble pulse" onclick="ChatBot.open()" aria-label="Open Career Chatbot">
+            🎓
+            <span id="chat-notification" class="notification-dot"></span>
+        </button>
+
+        <!-- Chat Window -->
+        <div id="chat-window" class="chat-window">
+            <!-- Header -->
+            <div class="chat-header">
+                <div class="header-left">
+                    <div class="bot-avatar-header">🎓</div>
+                    <div class="header-info">
+                        <span class="bot-name">Marg</span>
+                        <div class="status-wrapper">
+                            <span class="status-dot"></span>
+                            <span class="status-text">Your Career Guide • Online</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button onclick="ChatBot.minimize()" title="Minimize">─</button>
+                    <button onclick="ChatBot.close()" title="Close">✕</button>
+                </div>
+            </div>
+
+            <!-- Body -->
+            <div id="chat-body" class="chat-body">
+                <!-- Typing Indicator -->
+                <div id="typing-indicator" class="typing-indicator">
+                    <div class="bot-avatar">🎓</div>
+                    <div class="typing-bubble">
+                        <span></span><span></span><span></span>
+                    </div>
+                    <small style="font-size: 10px; color: #9ca3af; margin-bottom: 5px;">Marg is typing...</small>
+                </div>
+            </div>
+
+            <!-- Quick Actions Bar -->
+            <div class="quick-actions-bar">
+                <button class="quick-action-btn" onclick="ChatBot.handleQuickReply('Which stream should I choose?')">
+                    <i class="fas fa-bullseye"></i>
+                    <span>Streams</span>
+                </button>
+                <button class="quick-action-btn" onclick="ChatBot.handleQuickReply('What degrees are available?')">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Degrees</span>
+                </button>
+                <button class="quick-action-btn" onclick="ChatBot.handleQuickReply('Show me entrance exams')">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Exams</span>
+                </button>
+                <button class="quick-action-btn"
+                    onclick="ChatBot.handleQuickReply('Tell me about government colleges')">
+                    <i class="fas fa-university"></i>
+                    <span>Colleges</span>
+                </button>
+                <button class="quick-action-btn" onclick="ChatBot.handleQuickReply('Show me scholarships')">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <span>Scholarships</span>
+                </button>
+            </div>
+
+            <!-- Input Area -->
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" class="chat-input"
+                    placeholder="Ask me about JEE, NEET, CA, or Streams..." maxlength="400">
+                <button id="chat-send" class="chat-send-btn" onclick="ChatBot.sendFromInput()" disabled>
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/animations.js"></script>
     <script src="js/chatbot-knowledge.js"></script>
     <script src="js/chatbot.js"></script>
 </body>

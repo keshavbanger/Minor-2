@@ -88,6 +88,11 @@
                 <a href="scholarships.html" class="nav-link">Scholarships</a>
                 <a href="colleges.html" class="nav-link">Colleges</a>
             </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </nav>
 
@@ -167,7 +172,88 @@
 
         loadExams();
     </script>
-    <!-- Chatbot Scripts -->
+
+    <!-- 
+  STREAMSMART: MARG CHATBOT WIDGET SNIPPET
+  Paste this before </body> on every page. 
+-->
+    <div id="marg-chatbot-container">
+        <!-- Chat Bubble -->
+        <button id="chat-bubble" class="chat-bubble pulse" onclick="ChatBot.open()" aria-label="Open Career Chatbot">
+            🎓
+            <span id="chat-notification" class="notification-dot"></span>
+        </button>
+
+        <!-- Chat Window -->
+        <div id="chat-window" class="chat-window">
+            <!-- Header -->
+            <div class="chat-header">
+                <div class="header-left">
+                    <div class="bot-avatar-header">🎓</div>
+                    <div class="header-info">
+                        <span class="bot-name">Marg</span>
+                        <div class="status-wrapper">
+                            <span class="status-dot"></span>
+                            <span class="status-text">Your Career Guide • Online</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button onclick="ChatBot.minimize()" title="Minimize">─</button>
+                    <button onclick="ChatBot.close()" title="Close">✕</button>
+                </div>
+            </div>
+
+            <!-- Body -->
+            <div id="chat-body" class="chat-body">
+                <!-- Typing Indicator -->
+                <div id="typing-indicator" class="typing-indicator">
+                    <div class="bot-avatar">🎓</div>
+                    <div class="typing-bubble">
+                        <span></span><span></span><span></span>
+                    </div>
+                    <small style="font-size: 10px; color: #9ca3af; margin-bottom: 5px;">Marg is typing...</small>
+                </div>
+            </div>
+
+            <!-- Quick Actions Bar -->
+            <div class="quick-actions-bar">
+                <button class="quick-action-btn" onclick="ChatBot.handleQuickReply('Which stream should I choose?')">
+                    <i class="fas fa-bullseye"></i>
+                    <span>Streams</span>
+                </button>
+                <button class="quick-action-btn" onclick="ChatBot.handleQuickReply('What degrees are available?')">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Degrees</span>
+                </button>
+                <button class="quick-action-btn" onclick="ChatBot.handleQuickReply('Show me entrance exams')">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Exams</span>
+                </button>
+                <button class="quick-action-btn"
+                    onclick="ChatBot.handleQuickReply('Tell me about government colleges')">
+                    <i class="fas fa-university"></i>
+                    <span>Colleges</span>
+                </button>
+                <button class="quick-action-btn" onclick="ChatBot.handleQuickReply('Show me scholarships')">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <span>Scholarships</span>
+                </button>
+            </div>
+
+            <!-- Input Area -->
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" class="chat-input"
+                    placeholder="Ask me about JEE, NEET, CA, or Streams..." maxlength="400">
+                <button id="chat-send" class="chat-send-btn" onclick="ChatBot.sendFromInput()" disabled>
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/animations.js"></script>
     <script src="js/chatbot-knowledge.js"></script>
     <script src="js/chatbot.js"></script>
 </body>
