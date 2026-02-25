@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Degrees | StreamSmart</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/degrees.css">
+    <link rel="stylesheet" href="css/result.css"> <!-- Reusing degree-card styles -->
+</head>
+
+<body>
+
+    <nav class="navbar scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-graduation-cap"></i> StreamSmart
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="quiz.html" class="nav-link">Career Quiz</a>
+                <a href="degrees.html" class="nav-link">Explore Degrees</a>
+                <a href="roadmap.html" class="nav-link">Career Paths</a>
+            </div>
+            <div class="nav-auth">
+                <a href="login.html" class="btn btn-login">Login</a>
+                <a href="register.html" class="btn btn-register">Register</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="explorer-header">
+        <div class="container">
+            <h1>Explore Graduation Degrees</h1>
+            <p>Compare 30+ career-oriented degrees after Class 12</p>
+        </div>
+    </header>
+
+    <div class="filter-bar">
+        <div class="container filter-container">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="search-input"
+                    placeholder="Search by degree name or career (e.g. Software, IAS)...">
+            </div>
+
+            <div class="stream-tabs">
+                <div class="stream-tab active" data-stream="all">All</div>
+                <div class="stream-tab" data-stream="science">Science</div>
+                <div class="stream-tab" data-stream="commerce">Commerce</div>
+                <div class="stream-tab" data-stream="arts">Arts</div>
+            </div>
+
+            <select id="duration-filter" class="filter-select">
+                <option value="all">Any Duration</option>
+                <option value="3 Years">3 Years</option>
+                <option value="4 Years">4 Years</option>
+                <option value="5 Years">5+ Years</option>
+            </select>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="container">
+            <p id="result-count" class="results-info">Showing -- degrees</p>
+            <div id="explorer-grid" class="degree-grid">
+                <!-- Data will be injected -->
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-about">
+                <div class="logo"><i class="fas fa-graduation-cap"></i> StreamSmart</div>
+                <p>Helping Indian students make better career choices through data-driven guidance and honest advice.
+                </p>
+            </div>
+            <div>
+                <h4 class="footer-heading">Quick Links</h4>
+                <div class="footer-links">
+                    <a href="index.html" class="footer-link">Home</a>
+                    <a href="quiz.html" class="footer-link">Career Quiz</a>
+                    <a href="degrees.html" class="footer-link">Explore Degrees</a>
+                </div>
+            </div>
+            <div class="footer-bottom" style="grid-column: 1/-1; margin-top: 40px; border: none;">
+                <p>&copy; 2026 StreamSmart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="data/degrees.js"></script>
+    <script src="js/toast.js"></script>
+    <script src="js/degrees.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+
+</html>

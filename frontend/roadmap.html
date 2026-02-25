@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Roadmaps | StreamSmart</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/degrees.css"> <!-- Reusing filters -->
+    <link rel="stylesheet" href="css/roadmap.css">
+</head>
+
+<body>
+
+    <nav class="navbar scrolled">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-graduation-cap"></i> StreamSmart
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="quiz.html" class="nav-link">Career Quiz</a>
+                <a href="degrees.html" class="nav-link">Explore Degrees</a>
+                <a href="roadmap.html" class="nav-link">Career Paths</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="explorer-header" style="text-align: center;">
+        <div class="container">
+            <h1>Career Roadmaps</h1>
+            <p>Visualizing your journey from Class 10 to a successful career</p>
+        </div>
+    </header>
+
+    <div class="filter-bar">
+        <div class="container" style="display: flex; justify-content: center;">
+            <div class="stream-tabs">
+                <div class="stream-tab active" data-stream="science">Science</div>
+                <div class="stream-tab" data-stream="commerce">Commerce</div>
+                <div class="stream-tab" data-stream="arts">Arts</div>
+            </div>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="container roadmap-container">
+            <div id="roadmap-list">
+                <!-- Data will be injected -->
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-bottom" style="border: none;">
+            <p>&copy; 2026 StreamSmart. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="data/career-roadmaps.js"></script>
+    <script>
+        function renderRoadmaps(stream) {
+            const list = document.getElementById('roadmap-list');
+            const data = roadmapData[stream];
+
+            list.innerHTML = data.map(path => `
+                <div class="roadmap-card">
+                    <h3 style="margin-bottom: var(--spacing-lg); color: var(--color-primary);">${path.title}</h3>
+                    <div class="timeline">
+                        ${path.steps.map(step => `
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-content">
+                                    <div class="timeline-icon">
+                                        <i class="fas ${step.icon}"></i>
+                                    </div>
+                                    <div class="timeline-text">
+                                        <h4>${step.label}</h4>
+                                        <p>${step.detail}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        document.querySelectorAll('.stream-tab').forEach(tab => {
+            tab.onclick = () => {
+                document.querySelectorAll('.stream-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                renderRoadmaps(tab.dataset.stream);
+            };
+        });
+
+        // Init
+        renderRoadmaps('science');
+    </script>
+</body>
+
+</html>
