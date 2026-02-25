@@ -1,0 +1,22 @@
+# Root Gitignore
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.iml
+*.iws
+*.ipr
+
+# Build
+backend/target/
+frontend/node_modules/
+dist/
+build/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
