@@ -158,9 +158,16 @@
     <script>
         // Temporary patch to result.js to show colleges
         document.addEventListener('DOMContentLoaded', () => {
-            const result = JSON.parse(localStorage.getItem('quizResult'));
-            if (result && result.recommendedStream) {
-                const stream = result.recommendedStream; // e.g. "Science"
+            const result = JSON.parse(localStorage.getItem('cp_quiz_result'));
+            if (result) {
+                // Find top stream
+                const streams = [
+                    { name: 'Science', score: result.science },
+                    { name: 'Commerce', score: result.commerce },
+                    { name: 'Arts', score: result.arts }
+                ];
+                streams.sort((a, b) => b.score - a.score);
+                const stream = streams[0].name;
 
                 // Map stream to course keys
                 let courses = ['B.Tech', 'MBBS', 'B.Sc CS'];
