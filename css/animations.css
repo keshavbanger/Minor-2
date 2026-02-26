@@ -123,39 +123,7 @@
     }
 }
 
-/* Marquee Logic */
-.hero-marquee {
-    position: absolute;
-    bottom: 30px;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    z-index: 5;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    padding: 12px 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
 
-.marquee-content {
-    display: flex;
-    gap: 80px;
-    white-space: nowrap;
-    animation: marqueeMove 40s linear infinite;
-    width: fit-content;
-}
-
-@keyframes marqueeMove {
-    0% {
-        transform: translateX(0);
-    }
-
-    100% {
-        transform: translateX(calc(-50% - 40px));
-    }
-}
 
 /* Scroll Indicator */
 .scroll-indicator {
