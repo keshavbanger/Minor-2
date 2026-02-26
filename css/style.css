@@ -522,3 +522,329 @@ button,
         font-size: 40px;
     }
 }
+
+/* --- REBUILT SECTIONS --- */
+
+/* Section 1: Problem Section */
+.problem-section {
+    background: #ffffff;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.section-label {
+    color: #f26b38;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.section-title {
+    font-size: 38px !important;
+    font-weight: 800;
+    color: #1a3c6e;
+    margin-bottom: 12px;
+}
+
+.section-subtitle {
+    color: #6b7280;
+    font-size: 16px;
+    margin-bottom: 48px;
+}
+
+.pain-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 880px;
+    margin: 0 auto 40px;
+}
+
+.pain-card {
+    background: #f8faff;
+    border-left: 4px solid #f26b38;
+    border-radius: 0px 14px 14px 0px;
+    padding: 24px 20px;
+    text-align: left;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+    cursor: default;
+}
+
+.pain-card:hover {
+    background: #fff3ee;
+    transform: translateX(5px);
+    box-shadow: 0 6px 24px rgba(242, 107, 56, 0.1);
+}
+
+.pain-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.pain-emoji {
+    font-size: 28px;
+}
+
+.pain-tag {
+    background: #e8f0fe;
+    color: #1a3c6e;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+}
+
+.pain-quote {
+    font-size: 15px;
+    font-weight: 500;
+    color: #1c1c1e;
+    line-height: 1.6;
+    margin-top: 12px;
+    font-style: italic;
+}
+
+.pain-micro {
+    font-size: 11px;
+    color: #9ca3af;
+    margin-top: 8px;
+}
+
+.solution-strip {
+    background: linear-gradient(135deg, #1a3c6e, #2a5298);
+    border-radius: 20px;
+    padding: 36px 48px;
+    max-width: 880px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    text-align: left;
+}
+
+.solution-left .solution-label-small {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.solution-left .solution-text {
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    max-width: 440px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.solution-btn {
+    background: #f26b38;
+    color: white;
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    white-space: nowrap;
+    box-shadow: 0 4px 16px rgba(242, 107, 56, 0.4);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.solution-btn:hover {
+    background: #e05a28;
+    transform: scale(1.03);
+    color: white;
+}
+
+/* Section 2: How It Works Section */
+.how-it-works-section {
+    background: #f3f4f6;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.steps-row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    max-width: 1000px;
+    margin: 0 auto 48px;
+}
+
+.step-card {
+    flex: 1;
+    background: white;
+    border-radius: 20px;
+    padding: 36px 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+    border: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+    position: relative;
+    text-align: left;
+    min-height: 320px;
+}
+
+.step-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px rgba(26, 60, 110, 0.13);
+    border-color: #f26b38;
+}
+
+.step-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.step-number {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #f26b38;
+    color: white;
+    font-size: 18px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.step-icon-circle {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #eff6ff;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.step-title {
+    font-size: 19px !important;
+    font-weight: 700;
+    color: #1a3c6e;
+    margin: 0;
+}
+
+.step-desc {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #6b7280;
+    flex-grow: 1;
+}
+
+.step-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: #f0f7ff;
+    color: #1a3c6e;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 12px;
+    border-radius: 20px;
+    width: fit-content;
+    margin-top: auto;
+}
+
+.step-arrow {
+    font-size: 24px;
+    color: #f26b38;
+    padding: 0 16px;
+    flex-shrink: 0;
+    align-self: center;
+    opacity: 0.6;
+}
+
+.cta-wrapper {
+    text-align: center;
+}
+
+.cta-btn-large {
+    background: #f26b38;
+    color: white;
+    padding: 15px 36px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: 0 6px 24px rgba(242, 107, 56, 0.35);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.cta-btn-large i {
+    transition: transform 0.3s ease;
+}
+
+.cta-btn-large:hover {
+    background: #e05a28;
+    transform: translateY(-2px);
+    color: white;
+}
+
+.cta-btn-large:hover i {
+    transform: translateX(4px);
+}
+
+.cta-trust-text {
+    font-size: 13px;
+    color: #9ca3af;
+    margin-top: 12px;
+    display: block;
+}
+
+/* --- MOBILE RESPONSIVE --- */
+@media (max-width: 768px) {
+    .pain-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .solution-strip {
+        flex-direction: column;
+        text-align: center;
+        padding: 32px 24px;
+    }
+
+    .solution-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .solution-left .solution-text {
+        max-width: 100%;
+        font-size: 18px;
+    }
+
+    .steps-row {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .step-arrow {
+        display: none;
+    }
+
+    .step-card {
+        width: 100%;
+        padding: 28px 20px;
+        min-height: auto;
+    }
+}
