@@ -848,3 +848,69 @@ button,
         min-height: auto;
     }
 }
+
+/* --- STATS STRIP --- */
+.stats-strip {
+    background: #ffffff;
+    padding: 70px 0;
+    border-top: 1px solid #e5e7eb;
+}
+
+.stats-grid {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+}
+
+.stat-item {
+    text-align: center;
+    position: relative;
+    padding: 0 20px;
+}
+
+.stat-item .counter {
+    font-size: 52px !important;
+    font-weight: 800;
+    color: #1a3c6e;
+    margin: 0;
+    display: inline-block;
+    line-height: 1;
+}
+
+.stat-item span {
+    font-size: 32px;
+    font-weight: 700;
+    color: #f26b38;
+    vertical-align: top;
+    line-height: 1;
+}
+
+.stat-item p {
+    font-size: 16px;
+    font-weight: 600;
+    color: #6b7280;
+    margin-top: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 768px) {
+    .stats-strip {
+        padding: 50px 0;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px 0;
+    }
+
+    .stat-item .counter {
+        font-size: 40px !important;
+    }
+
+    .stat-item span {
+        font-size: 24px;
+    }
+}
