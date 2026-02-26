@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Dashboard | StreamSmart Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --sidebar: #1e293b;
+            --accent: #3b82f6;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --white: #ffffff;
+            --border: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text-main);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background: var(--sidebar);
+            color: white;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 22px;
+            margin-bottom: 40px;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-item {
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 5px;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #94a3b8;
+            text-decoration: none;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+
+        .nav-item.active {
+            border-left: 4px solid var(--accent);
+        }
+
+        /* Main Content */
+        .main {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .title h1 {
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        .title p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-card .label {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .stat-card .value {
+            font-size: 24px;
+            font-weight: 800;
+            margin-top: 5px;
+            color: var(--accent);
+        }
+
+        /* Table Style */
+        .table-container {
+            background: var(--white);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .table-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .search-box {
+            position: relative;
+            width: 300px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 10px 15px 10px 35px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            outline: none;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 12px;
+            top: 12px;
+            color: var(--text-muted);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th {
+            background: #f1f5f9;
+            padding: 15px 20px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+        }
+
+        tr:hover {
+            background: #f8fafc;
+        }
+
+        .badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .badge-govt {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .badge-pvt {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .pill {
+            background: #eff6ff;
+            color: #1d4ed8;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-right: 4px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <div class="logo">
+            <i class="fas fa-database"></i> StreamSmart DB
+        </div>
+        <a href="#" class="nav-item active">
+            <i class="fas fa-university"></i> Colleges Table
+        </a>
+        <a href="index.html" class="nav-link nav-item"
+            style="margin-top: auto; border: 1px solid rgba(255,255,255,0.1);">
+            <i class="fas fa-arrow-left"></i> Back to Website
+        </a>
+    </div>
+
+    <div class="main">
+        <div class="header">
+            <div class="title">
+                <h1>Online Database Explorer</h1>
+                <p>Viewing production-grade college data records</p>
+            </div>
+            <div
+                style="background: #dcfce7; color: #166534; padding: 8px 15px; border-radius: 8px; font-size: 13px; font-weight: 600;">
+                <i class="fas fa-circle" style="font-size: 10px;"></i> Live Sync: Active
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="label">Total Records</div>
+                <div class="value" id="stat-total">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Govt. Institutions</div>
+                <div class="value" id="stat-govt">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Private Institutions</div>
+                <div class="value" id="stat-pvt">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">States Covered</div>
+                <div class="value" id="stat-states">0</div>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <div class="table-header">
+                <h3 style="font-size: 16px; font-weight: 700;">Schema: `colleges`</h3>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="search-db" placeholder="Filter rows by name or state..."
+                        oninput="refreshTable()">
+                </div>
+            </div>
+            <div style="overflow-x: auto;">
+                <table id="db-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>College Name</th>
+                            <th>State</th>
+                            <th>Type</th>
+                            <th>NIRF</th>
+                            <th>Fees (Annual)</th>
+                            <th>Entrance</th>
+                        </tr>
+                    </thead>
+                    <tbody id="db-body">
+                        <!-- Rows injected here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/colleges-data.js"></script>
+    <script>
+        function refreshTable() {
+            const query = document.getElementById('search-db').value.toLowerCase();
+            const body = document.getElementById('db-body');
+
+            const filtered = COLLEGES_DATA.filter(c =>
+                c.name.toLowerCase().includes(query) ||
+                c.state.toLowerCase().includes(query)
+            );
+
+            body.innerHTML = filtered.map(c => `
+                <tr>
+                    <td style="color: #64748b; font-family: monospace; font-weight:600;">${c.id}</td>
+                    <td style="font-weight: 600; color: #1e293b;">${c.name}</td>
+                    <td>${c.state}</td>
+                    <td><span class="badge ${c.isGovernment ? 'badge-govt' : 'badge-pvt'}">${c.type}</span></td>
+                    <td style="font-weight: 700;">#${c.nirf}</td>
+                    <td style="color: #10b981; font-weight: 700;">₹${c.fees_annual.toLocaleString()}</td>
+                    <td><span class="pill">${c.entrance}</span></td>
+                </tr>
+            `).join('');
+
+            // Update stats
+            document.getElementById('stat-total').textContent = COLLEGES_DATA.length;
+            document.getElementById('stat-govt').textContent = COLLEGES_DATA.filter(c => c.isGovernment).length;
+            document.getElementById('stat-pvt').textContent = COLLEGES_DATA.filter(c => !c.isGovernment).length;
+            const states = new Set(COLLEGES_DATA.map(c => c.state));
+            document.getElementById('stat-states').textContent = states.size;
+        }
+
+        document.addEventListener('DOMContentLoaded', refreshTable);
+    </script>
+</body>
+
+</html>
