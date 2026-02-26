@@ -233,9 +233,12 @@
         <a href="#" class="nav-item" id="nav-students" onclick="toggleView('students')">
             <i class="fas fa-users"></i> Students (Registrations)
         </a>
+        <a href="#" class="nav-item" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
         <div
             style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 8px; font-size: 11px; color: #94a3b8; line-height: 1.5;">
-            <i class="fas fa-info-circle"></i> This data is synced from your <strong>Railway MySQL</strong> database.
+            <i class="fas fa-info-circle"></i> Connected to: <span id="db-status">Online (Railway)</span>
         </div>
         <a href="index.html" class="nav-link nav-item"
             style="margin-top: auto; border: 1px solid rgba(255,255,255,0.1);">
@@ -244,11 +247,12 @@
     </div>
 
     <div class="main">
+        <!-- Colleges View -->
         <div id="colleges-view">
             <div class="header">
                 <div class="title">
                     <h1>College Database Explorer</h1>
-                    <p>Viewing production-grade college data records</p>
+                    <p>Viewing production-grade college data records (JS Synced)</p>
                 </div>
                 <div
                     style="background: #dcfce7; color: #166534; padding: 8px 15px; border-radius: 8px; font-size: 13px; font-weight: 600;">
@@ -293,7 +297,6 @@
                                 <th>Type</th>
                                 <th>NIRF</th>
                                 <th>Fees (Annual)</th>
-                                <th>Entrance</th>
                             </tr>
                         </thead>
                         <tbody id="db-body">
@@ -304,89 +307,51 @@
             </div>
         </div>
 
+        <!-- Students View -->
         <div id="students-view" style="display: none;">
-            <div class="header">
-                <div class="title">
-                    <h1>Student Registrations</h1>
-                    <p>Profiles of students who have signed up or taken the quiz</p>
-                </div>
+            <div id="auth-check-msg" style="text-align: center; padding: 100px 0; display: none;">
+                <i class="fas fa-shield-alt fa-4x" style="color: #e2e8f0; margin-bottom: 20px;"></i>
+                <h3>Authentication Required</h3>
+                <p style="color: #64748b; margin-bottom: 25px;">Please login as an admin to view registered student
+                    data.</p>
+                <a href="admin-login.html" class="btn"
+                    style="background:#1a3c6e; color:white; padding:10px 25px; border-radius: 8px; text-decoration: none; font-weight: 600;">Admin
+                    Login</a>
             </div>
 
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="label">Total Students</div>
-                    <div class="value">4</div>
+            <div id="students-content">
+                <div class="header">
+                    <div class="title">
+                        <h1>Student Registrations</h1>
+                        <p>Profiles synced from <strong style="color:#1a3c6e;">Railway MySQL Database</strong></p>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <div class="label">Recent Logins (24h)</div>
-                    <div class="value">2</div>
-                </div>
-                <div class="stat-card">
-                    <div class="label">Quiz Completions</div>
-                    <div class="value" style="color: #10b981;">3</div>
-                </div>
-                <div class="stat-card">
-                    <div class="label">Top Stream</div>
-                    <div class="value" style="color: #3b82f6;">Science</div>
-                </div>
-            </div>
 
-            <div class="table-container">
-                <div class="table-header">
-                    <h3 style="font-size: 16px; font-weight: 700;">Schema: `users`</h3>
-                </div>
-                <div style="overflow-x: auto;">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Full Name</th>
-                                <th>Email</th>
-                                <th>Mobile</th>
-                                <th>Class</th>
-                                <th>Status</th>
-                                <th>Registered At</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td><strong>Rahul Sharma</strong></td>
-                                <td>rahul@example.com</td>
-                                <td>9876543210</td>
-                                <td><span class="pill">Class 12</span></td>
-                                <td><span class="badge badge-govt">Active</span></td>
-                                <td>Feb 25, 2026</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td><strong>Anjali Verma</strong></td>
-                                <td>anjali@example.com</td>
-                                <td>9988776655</td>
-                                <td><span class="pill">Class 10</span></td>
-                                <td><span class="badge badge-govt">Active</span></td>
-                                <td>Feb 26, 2026</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td><strong>Keshav Singh</strong></td>
-                                <td>keshav@test.com</td>
-                                <td>9123456789</td>
-                                <td><span class="pill">Passed</span></td>
-                                <td><span class="badge badge-govt">Active</span></td>
-                                <td>Feb 27, 2026</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td><strong>Priya Patel</strong></td>
-                                <td>priya@demo.com</td>
-                                <td>9554433221</td>
-                                <td><span class="pill">Class 12</span></td>
-                                <td><span class="badge badge-govt">Active</span></td>
-                                <td>Today</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3 style="font-size: 16px; font-weight: 700;">Schema: `users`</h3>
+                        <button onclick="fetchRealStudents()"
+                            style="background:#eff6ff; border:1px solid #dbeafe; color:#1d4ed8; padding:5px 12px; border-radius:6px; font-size:12px; font-weight:700; cursor:pointer;">
+                            <i class="fas fa-sync"></i> Refresh Data
+                        </button>
+                    </div>
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Full Name</th>
+                                    <th>Email</th>
+                                    <th>Mobile</th>
+                                    <th>Class</th>
+                                    <th>Role</th>
+                                </tr>
+                            </thead>
+                            <tbody id="student-db-body">
+                                <!-- Data injected via API -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -394,13 +359,62 @@
 
     <script src="js/colleges-data.js"></script>
     <script>
+        const API_BASE = 'http://localhost:8080/api/v1'; // Update to your production URL
+
         function toggleView(view) {
             document.getElementById('colleges-view').style.display = view === 'colleges' ? 'block' : 'none';
             document.getElementById('students-view').style.display = view === 'students' ? 'block' : 'none';
 
             document.getElementById('nav-colleges').classList.toggle('active', view === 'colleges');
             document.getElementById('nav-students').classList.toggle('active', view === 'students');
+
+            if (view === 'students') {
+                const token = localStorage.getItem('admin_token');
+                if (!token) {
+                    document.getElementById('students-content').style.display = 'none';
+                    document.getElementById('auth-check-msg').style.display = 'block';
+                } else {
+                    document.getElementById('students-content').style.display = 'block';
+                    document.getElementById('auth-check-msg').style.display = 'none';
+                    fetchRealStudents();
+                }
+            }
         }
+
+        async function fetchRealStudents() {
+            const token = localStorage.getItem('admin_token');
+            const tbody = document.getElementById('student-db-body');
+            tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:40px;">Loading student data from server...</td></tr>';
+
+            try {
+                const response = await fetch(`${API_BASE}/admin/users`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (!response.ok) throw new Error('Auth failed');
+
+                const students = await response.json();
+                tbody.innerHTML = students.map(s => `
+                    <tr>
+                        <td>${s.id}</td>
+                        <td><strong>${s.fullName}</strong></td>
+                        <td>${s.email}</td>
+                        <td>${s.mobile || 'N/A'}</td>
+                        <td><span class="pill">${s.currentClass}</span></td>
+                        <td><span class="badge ${s.role === 'ADMIN' ? 'badge-pvt' : 'badge-govt'}">${s.role}</span></td>
+                    </tr>
+                `).join('');
+            } catch (err) {
+                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:40px; color:red;">Error fetching data. Ensure backend is running and you are logged in.</td></tr>`;
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('admin_token');
+            localStorage.removeItem('admin_user');
+            window.location.href = 'admin-login.html';
+        }
+
         function refreshTable() {
             const query = document.getElementById('search-db').value.toLowerCase();
             const body = document.getElementById('db-body');

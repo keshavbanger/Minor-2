@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | StreamSmart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --primary: #1a3c6e;
+            --accent: #3b82f6;
+            --text: #1e293b;
+            --white: #ffffff;
+            --error: #ef4444;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .subtitle {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .btn-login {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn-login:hover {
+            background: #152e55;
+            transform: translateY(-1px);
+        }
+
+        .error-msg {
+            color: var(--error);
+            font-size: 13px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 25px;
+            font-size: 13px;
+            color: #64748b;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            color: var(--primary);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-card">
+        <div class="logo">
+            <i class="fas fa-lock"></i> StreamSmart
+        </div>
+        <div class="subtitle">Administrative Portal Access</div>
+
+        <form id="login-form">
+            <div class="form-group">
+                <label>Admin Email</label>
+                <input type="email" id="email" placeholder="admin@streamsmart.in" required>
+            </div>
+            <div class="form-group">
+                <label>Security Password</label>
+                <input type="password" id="password" placeholder="••••••••" required>
+            </div>
+
+            <button type="submit" class="btn-login" id="login-btn">
+                <span id="btn-text">Authorize Access</span>
+            </button>
+            <div id="error-box" class="error-msg">Invalid credentials or lack of admin privileges.</div>
+        </form>
+
+        <a href="index.html" class="back-link">← Return to Main Website</a>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:8080/api/v1/auth/login'; // Update to your backend URL if different
+
+        document.getElementById('login-form').onsubmit = async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const btn = document.getElementById('login-btn');
+            const errorBox = document.getElementById('error-box');
+
+            btn.disabled = true;
+            btn.innerText = 'Authenticating...';
+            errorBox.style.display = 'none';
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.user.role === 'ADMIN') {
+                    // Success! Store token and user info
+                    localStorage.setItem('admin_token', data.token);
+                    localStorage.setItem('admin_user', JSON.stringify(data.user));
+                    window.location.href = 'database-view.html';
+                } else {
+                    throw new Error('Unauthorized');
+                }
+            } catch (err) {
+                errorBox.style.display = 'block';
+                btn.disabled = false;
+                btn.innerText = 'Authorize Access';
+            }
+        };
+    </script>
+</body>
+
+</html>
