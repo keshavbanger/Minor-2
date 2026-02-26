@@ -4,25 +4,519 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Government Colleges | StreamSmart</title>
+    <title>Colleges | StreamSmart - Find Your Perfect Campus</title>
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- AOS -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="css/degrees.css"> <!-- Reusing filters wrapper -->
-    <link rel="stylesheet" href="css/colleges.css">
     <link rel="stylesheet" href="css/chatbot.css">
+
+    <style>
+        /* COLLEGES PAGE SPECIFIC STYLES */
+        :root {
+            --college-govt: #1a3c6e;
+            --college-pvt: #f26b38;
+            --college-bg: #f3f4f6;
+        }
+
+        body {
+            background: var(--college-bg);
+        }
+
+        /* Header */
+        .college-header {
+            background: #1a3c6e;
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .college-header h1 {
+            font-size: 42px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        .college-header p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Sticky Filter Bar */
+        .sticky-filters {
+            position: sticky;
+            top: 70px;
+            z-index: 100;
+            background: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 15px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .filters-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .course-filters {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-pill {
+            padding: 8px 18px;
+            border-radius: 30px;
+            border: 1.5px solid #1a3c6e;
+            background: white;
+            color: #1a3c6e;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-pill.active {
+            background: #f26b38;
+            border-color: #f26b38;
+            color: white;
+            box-shadow: 0 4px 10px rgba(242, 107, 56, 0.3);
+        }
+
+        .sub-filters {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .type-toggle {
+            display: flex;
+            background: #f1f5f9;
+            padding: 4px;
+            border-radius: 12px;
+        }
+
+        .toggle-btn {
+            padding: 6px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .toggle-btn.active {
+            background: white;
+            color: #1a3c6e;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .state-dropdown {
+            padding: 8px 15px;
+            border-radius: 10px;
+            border: 1.5px solid #e5e7eb;
+            font-family: inherit;
+            font-size: 14px;
+            color: #1a3c6e;
+            font-weight: 500;
+        }
+
+        /* Featured B.Tech Section */
+        .featured-section {
+            padding: 40px 0 20px;
+        }
+
+        .featured-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a3c6e;
+            margin-bottom: 25px;
+        }
+
+        .featured-tabs {
+            display: flex;
+            gap: 0;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .feat-tab {
+            padding: 12px 25px;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            color: #6b7280;
+        }
+
+        .feat-tab.active {
+            color: #1a3c6e;
+        }
+
+        .feat-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #1a3c6e;
+        }
+
+        /* College Cards Grid */
+        .college-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        /* College Card */
+        .college-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+            border: 1px solid #e5e7eb;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .college-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 48px rgba(26, 60, 110, 0.1);
+            border-color: #f26b38;
+        }
+
+        .card-strip {
+            height: 8px;
+            width: 100%;
+        }
+
+        .card-strip.govt {
+            background: #1a3c6e;
+        }
+
+        .card-strip.pvt {
+            background: #f26b38;
+        }
+
+        .card-body {
+            padding: 22px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .badge-type {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+
+        .badge-govt {
+            background: #eff6ff;
+            color: #1a3c6e;
+        }
+
+        .badge-pvt {
+            background: #fff3ee;
+            color: #f26b38;
+        }
+
+        .badge-nirf {
+            background: #f1f5f9;
+            color: #64748b;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+
+        .college-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a3c6e;
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+
+        .college-loc {
+            font-size: 13px;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .divider {
+            height: 1px;
+            background: #f1f5f9;
+            margin: 15px 0;
+        }
+
+        .fees-box .label {
+            font-size: 10px;
+            font-weight: 700;
+            color: #94a3b8;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .fee-amount {
+            font-size: 24px;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .fee-govt {
+            color: #10b981;
+        }
+
+        .fee-pvt {
+            color: #f26b38;
+        }
+
+        .total-course {
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .info-mini-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .info-cell .label {
+            font-size: 11px;
+            color: #94a3b8;
+            display: block;
+        }
+
+        .info-cell .value {
+            font-size: 13px;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .highlight-tag {
+            background: #f8faff;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 12px;
+            color: #1a3c6e;
+            font-style: italic;
+            border-left: 3px solid #1a3c6e;
+            margin-bottom: 20px;
+        }
+
+        .view-btn {
+            width: 100%;
+            padding: 12px;
+            background: transparent;
+            border: 1.5px solid #1a3c6e;
+            color: #1a3c6e;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .view-btn:hover {
+            background: #1a3c6e;
+            color: white;
+        }
+
+        /* Accordion Expansion */
+        .expanded-content {
+            display: none;
+            padding-top: 20px;
+            border-top: 1px dashed #e5e7eb;
+            margin-top: 20px;
+            animation: fadeIn 0.3s;
+        }
+
+        .expanded-content.active {
+            display: block;
+        }
+
+        .expand-section-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1a3c6e;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .branches-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .branch-tag {
+            background: #f1f5f9;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            color: #475569;
+        }
+
+        /* Modal / Drawer */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-card {
+            background: white;
+            width: 90%;
+            max-width: 600px;
+            max-height: 85vh;
+            border-radius: 24px;
+            overflow-y: auto;
+            position: relative;
+            padding: 40px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #64748b;
+        }
+
+        .fee-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .fee-table th,
+        .fee-table td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .fee-table th {
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        .fee-table td {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a3c6e;
+        }
+
+        /* MP Section Specifics */
+        .mp-badges {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .mp-scholar-badge {
+            background: #fffbeb;
+            color: #b45309;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: 1px solid #fde68a;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 991px) {
+            .college-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .college-header {
+                padding: 50px 20px;
+            }
+
+            .college-header h1 {
+                font-size: 32px;
+            }
+
+            .college-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sticky-filters {
+                top: 60px;
+                overflow-x: auto;
+            }
+
+            .course-filters {
+                flex-wrap: nowrap;
+                justify-content: flex-start;
+                padding: 0 20px;
+            }
+
+            .sub-filters {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -37,7 +531,7 @@
                 <a href="quiz.html" class="nav-link">Career Quiz</a>
                 <a href="degrees.html" class="nav-link">Explore Degrees</a>
                 <a href="roadmap.html" class="nav-link">Career Paths</a>
-                <a href="colleges.html" class="nav-link">Colleges</a>
+                <a href="colleges.html" class="nav-link active">Colleges</a>
             </div>
             <div class="hamburger">
                 <span></span>
@@ -47,146 +541,114 @@
         </div>
     </nav>
 
-    <header class="explorer-header">
+    <header class="college-header">
         <div class="container">
-            <h1>Government Degree Colleges</h1>
-            <p>Find affordable, high-quality education in Madhya Pradesh and surrounding states.</p>
+            <h1>Find Your Perfect College</h1>
+            <p>Compare real fees, verified NIRF rankings, and placement data for 100+ top institutions in India.</p>
         </div>
     </header>
 
-    <div class="filter-bar">
-        <div class="container filter-container">
-            <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input type="text" id="college-search" placeholder="Search college name or location...">
+    <div class="sticky-filters">
+        <div class="container filters-wrapper">
+            <div class="course-filters" id="course-filters">
+                <button class="filter-pill active" onclick="filterByCourse('B.Tech')">B.Tech</button>
+                <button class="filter-pill" onclick="filterByCourse('MBBS')">MBBS</button>
+                <button class="filter-pill" onclick="filterByCourse('B.Sc CS')">B.Sc CS</button>
+                <button class="filter-pill" onclick="filterByCourse('B.Com')">B.Com</button>
+                <button class="filter-pill" onclick="filterByCourse('BBA')">BBA</button>
+                <button class="filter-pill" onclick="filterByCourse('B.A.')">B.A.</button>
+                <button class="filter-pill" onclick="filterByCourse('Law')">Law</button>
+                <button class="filter-pill" onclick="filterByCourse('B.Ed')">B.Ed</button>
             </div>
 
-            <select id="stream-filter" class="filter-select">
-                <option value="all">All Streams</option>
-                <option value="Science">Science</option>
-                <option value="Commerce">Commerce</option>
-                <option value="Arts">Arts</option>
-            </select>
+            <div class="sub-filters">
+                <div class="type-toggle">
+                    <span class="toggle-btn active" id="type-all" onclick="filterByType('all')">All</span>
+                    <span class="toggle-btn" id="type-govt" onclick="filterByType('govt')">Government</span>
+                    <span class="toggle-btn" id="type-private" onclick="filterByType('private')">Private</span>
+                </div>
 
-            <select id="district-filter" class="filter-select">
-                <option value="all">All Districts</option>
-                <option value="Bhopal">Bhopal</option>
-                <option value="Indore">Indore</option>
-                <option value="Gwalior">Gwalior</option>
-                <option value="Jabalpur">Jabalpur</option>
-                <option value="Ujjain">Ujjain</option>
-                <option value="Sagar">Sagar</option>
-                <option value="Rewa">Rewa</option>
-            </select>
+                <select id="state-filter" class="state-dropdown" onchange="filterByState(this.value)">
+                    <option value="all">All States</option>
+                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                    <option value="Karnataka">Karnataka</option>
+                    <option value="Tamil Nadu">Tamil Nadu</option>
+                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                    <option value="Telangana">Telangana</option>
+                </select>
+            </div>
         </div>
     </div>
 
-    <section class="section">
-        <div class="container">
-            <p id="college-count" class="results-info">Showing -- Government Colleges</p>
-            <div id="college-grid" class="college-grid">
-                <!-- Data will be injected -->
+    <main class="container">
+        <!-- Featured MP Section -->
+        <section id="mp-section" class="featured-section">
+            <div class="featured-title">📍 Top Colleges in Madhya Pradesh</div>
+            <div id="mp-grid" class="college-grid">
+                <!-- MP-specific colleges will appear here -->
             </div>
+        </section>
+
+        <!-- Main B.Tech Featured / Comparison Section (Only shows for B.Tech) -->
+        <section id="btech-featured" class="featured-section">
+            <div class="featured-title">⭐ Featured: Engineering Colleges</div>
+
+            <div class="featured-tabs">
+                <div class="feat-tab active" id="feat-govt-tab" onclick="switchFeatTab('govt')">IITs & NITs (Government)
+                </div>
+                <div class="feat-tab" id="feat-pvt-tab" onclick="switchFeatTab('private')">Top Private Universities
+                </div>
+            </div>
+
+            <!-- Comparison Strip -->
+            <div id="btech-comparison" class="highlight-tag"
+                style="background:#fffbeb; border-color:#f59e0b; margin-bottom:40px; border-radius:15px; padding:20px;">
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:40px;">
+                    <div>
+                        <strong style="color:#d97706">Government (IIT/NIT)</strong>
+                        <p style="font-size:13px; margin-top:5px;">Fees: ₹1.0L – 2.4L / year<br>Total: ₹4L –
+                            9L<br>Affordable High Value!</p>
+                    </div>
+                    <div>
+                        <strong style="color:#d97706">Private Universities</strong>
+                        <p style="font-size:13px; margin-top:5px;">Fees: ₹1.8L – 5.5L / year<br>Total: ₹8L –
+                            24L<br>Check Scholarships!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="featured-grid" class="college-grid">
+                <!-- Featured B.Tech cards -->
+            </div>
+        </section>
+
+        <!-- General Grid Results -->
+        <section class="section" style="padding-top: 20px;">
+            <p id="results-summ" style="margin-bottom: 25px; font-weight: 500; color: #64748b;"></p>
+            <div id="main-college-grid" class="college-grid">
+                <!-- Main filtered list -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal for Detailed Fee Breakdown -->
+    <div id="college-modal" class="modal-overlay">
+        <div class="modal-card" id="modal-content">
+            <!-- Dynamic Content -->
         </div>
-    </section>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/colleges-data.js"></script>
+    <script src="js/colleges.js"></script>
 
     <footer class="footer">
         <div class="container footer-bottom" style="border: none;">
             <p>&copy; 2026 StreamSmart. All rights reserved.</p>
         </div>
     </footer>
-
-    <!-- Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="data/colleges.js"></script>
-    <script src="js/colleges.js"></script>
-    <script>
-        AOS.init();
-    </script>
-
-    <!-- 
-  STREAMSMART: MARG CHATBOT WIDGET SNIPPET
-  Paste this before </body> on every page. 
--->
-    <div id="marg-chatbot-container">
-        <!-- Chat Bubble -->
-        <button id="chat-bubble" class="chat-bubble pulse" onclick="ChatBot.open()" aria-label="Open Career Chatbot">
-            🎓
-            <span id="chat-notification" class="notification-dot"></span>
-        </button>
-
-        <!-- Chat Window -->
-        <div id="chat-window" class="chat-window">
-            <!-- Header -->
-            <div class="chat-header">
-                <div class="header-left">
-                    <div class="bot-avatar-header">🎓</div>
-                    <div class="header-info">
-                        <span class="bot-name">Marg</span>
-                        <div class="status-wrapper">
-                            <span class="status-dot"></span>
-                            <span class="status-text">Your Career Guide • Online</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="header-actions">
-                    <button onclick="ChatBot.minimize()" title="Minimize">─</button>
-                    <button onclick="ChatBot.close()" title="Close">✕</button>
-                </div>
-            </div>
-
-            <!-- Body -->
-            <div id="chat-body" class="chat-body">
-                <!-- Typing Indicator -->
-                <div id="typing-indicator" class="typing-indicator">
-                    <div class="bot-avatar">🎓</div>
-                    <div class="typing-bubble">
-                        <span></span><span></span><span></span>
-                    </div>
-                    <small style="font-size: 10px; color: #9ca3af; margin-bottom: 5px;">Marg is typing...</small>
-                </div>
-            </div>
-
-            <!-- Quick Actions Bar -->
-            <div class="quick-actions-bar">
-                <button class="quick-action-btn" onclick="ChatBot.handleQuickReply('Which stream should I choose?')">
-                    <i class="fas fa-bullseye"></i>
-                    <span>Streams</span>
-                </button>
-                <button class="quick-action-btn" onclick="ChatBot.handleQuickReply('What degrees are available?')">
-                    <i class="fas fa-graduation-cap"></i>
-                    <span>Degrees</span>
-                </button>
-                <button class="quick-action-btn" onclick="ChatBot.handleQuickReply('Show me entrance exams')">
-                    <i class="fas fa-file-alt"></i>
-                    <span>Exams</span>
-                </button>
-                <button class="quick-action-btn"
-                    onclick="ChatBot.handleQuickReply('Tell me about government colleges')">
-                    <i class="fas fa-university"></i>
-                    <span>Colleges</span>
-                </button>
-                <button class="quick-action-btn" onclick="ChatBot.handleQuickReply('Show me scholarships')">
-                    <i class="fas fa-hand-holding-usd"></i>
-                    <span>Scholarships</span>
-                </button>
-            </div>
-
-            <!-- Input Area -->
-            <div class="chat-input-area">
-                <input type="text" id="chat-input" class="chat-input"
-                    placeholder="Ask me about JEE, NEET, CA, or Streams..." maxlength="400">
-                <button id="chat-send" class="chat-send-btn" onclick="ChatBot.sendFromInput()" disabled>
-                    <i class="fas fa-paper-plane"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Scripts -->
-    <script src="js/animations.js"></script>
-    <script src="js/chatbot-knowledge.js"></script>
-    <script src="js/chatbot.js"></script>
 </body>
 
 </html>

@@ -75,13 +75,23 @@
     </footer>
 
     <!-- Scripts -->
+    <script src="js/colleges-data.js"></script>
     <script src="data/career-roadmaps.js"></script>
     <script>
         function renderRoadmaps(stream) {
             const list = document.getElementById('roadmap-list');
             const data = roadmapData[stream];
 
-            list.innerHTML = data.map(path => `
+            list.innerHTML = data.map(path => {
+                // Find matching colleges based on the roadmap title (e.g., "Software Engineer" -> matches "B.Tech" or "B.Sc CS")
+                let matchingCourse = 'B.Tech';
+                if (path.title.toLowerCase().includes('doctor') || path.title.toLowerCase().includes('medical')) matchingCourse = 'MBBS';
+                if (path.title.toLowerCase().includes('lawyer')) matchingCourse = 'Law';
+                if (path.title.toLowerCase().includes('ca') || path.title.toLowerCase().includes('account')) matchingCourse = 'B.Com';
+
+                const recommendedColleges = COLLEGES_DATA.filter(c => c.course === matchingCourse).slice(0, 3);
+
+                return `
                 <div class="roadmap-card">
                     <h3 style="margin-bottom: var(--spacing-lg); color: var(--color-primary);">${path.title}</h3>
                     <div class="timeline">
@@ -100,8 +110,22 @@
                             </div>
                         `).join('')}
                     </div>
+
+                    <div class="recommended-colleges" style="margin-top: 40px; padding-top: 30px; border-top: 1px dashed #e5e7eb;">
+                        <h4 style="color: #1a3c6e; margin-bottom: 20px;">🎓 Recommended Colleges for this Path</h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px;">
+                            ${recommendedColleges.map(c => `
+                                <div style="padding: 15px; border: 1px solid #f1f5f9; border-radius: 10px; background: #f8fafc;">
+                                    <span style="font-size: 10px; font-weight: 700; color: ${c.isGovernment ? '#10b981' : '#f26b38'}">${c.type.toUpperCase()}</span>
+                                    <h5 style="font-size: 13px; margin: 5px 0; color: #1a3c6e;">${c.name}</h5>
+                                    <p style="font-size: 12px; font-weight: 700;">₹${c.fees_annual.toLocaleString()}/yr</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <a href="colleges.html?course=${encodeURIComponent(matchingCourse)}" style="display: inline-block; margin-top: 20px; font-size: 13px; font-weight: 700; color: #f26b38;">View all ${matchingCourse} colleges →</a>
+                    </div>
                 </div>
-            `).join('');
+            `}).join('');
         }
 
         document.querySelectorAll('.stream-tab').forEach(tab => {

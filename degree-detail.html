@@ -69,6 +69,17 @@
                     <!-- Tags -->
                 </div>
 
+                <div id="colleges-section" style="margin-top: 50px;">
+                    <h3 style="margin-bottom: 20px;">Top Colleges for this Degree</h3>
+                    <div id="degree-colleges-grid"
+                        style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                        <!-- College mini cards injected here -->
+                    </div>
+                    <a href="colleges.html" id="view-all-link" class="btn"
+                        style="margin-top: 25px; display: inline-block; color: #1a3c6e; font-weight: 700;">View all
+                        colleges →</a>
+                </div>
+
                 <div
                     style="margin-top: 50px; padding: 30px; background: #f1f5f9; border-radius: 12px; text-align: center;">
                     <h3>Ready to take the first step?</h3>
@@ -86,6 +97,7 @@
         </div>
     </footer>
 
+    <script src="js/colleges-data.js"></script>
     <script src="data/degrees.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -101,94 +113,115 @@
                 document.getElementById('detail-meta').innerHTML = `<i class="fas fa-clock"></i> ${degree.duration} | <i class="fas fa-money-bill-wave"></i> ${degree.salary}`;
                 document.getElementById('detail-desc').textContent = degree.description;
                 document.getElementById('detail-careers').innerHTML = degree.careers.map(c => `<span class="career-tag" style="font-size: 16px; padding: 10px 20px; border: 1px solid var(--color-border);">${c}</span>`).join('');
+
+                // Inject Top Colleges
+                const relatedColleges = COLLEGES_DATA.filter(c => c.course === degree.name || degree.name.includes(c.course));
+                const govtColleges = relatedColleges.filter(c => c.isGovernment).slice(0, 3);
+                const pvtColleges = relatedColleges.filter(c => !c.isGovernment).slice(0, 2);
+                const displayColleges = [...govtColleges, ...pvtColleges];
+
+                const collegeGrid = document.getElementById('degree-colleges-grid');
+                if (displayColleges.length > 0) {
+                    collegeGrid.innerHTML = displayColleges.map(c => `
+                        <div style="padding: 20px; border: 1px solid #e5e7eb; border-radius: 12px; background: white;">
+                            <span style="font-size: 10px; font-weight: 700; color: ${c.isGovernment ? '#1a3c6e' : '#f26b38'}">${c.type.toUpperCase()}</span>
+                            <h4 style="font-size: 15px; margin: 5px 0;">${c.name}</h4>
+                            <p style="font-size: 12px; color: #64748b;">📍 ${c.location}</p>
+                            <p style="font-size: 14px; font-weight: 700; margin-top: 10px; color: ${c.isGovernment ? '#10b981' : '#f26b38'}">₹${c.fees_annual.toLocaleString()}/yr</p>
+                        </div>
+                    `).join('');
+                    document.getElementById('view-all-link').href = `colleges.html?course=${encodeURIComponent(degree.name)}`;
+                } else {
+                    document.getElementById('colleges-section').style.display = 'none';
+                }
             } else {
                 window.location.href = 'degrees.html';
             }
         });
     </script>
-    
-<!-- 
+
+    <!-- 
   STREAMSMART: MARG CHATBOT WIDGET SNIPPET
   Paste this before </body> on every page. 
 -->
-<div id="marg-chatbot-container">
-    <!-- Chat Bubble -->
-    <button id="chat-bubble" class="chat-bubble pulse" onclick="ChatBot.open()" aria-label="Open Career Chatbot">
-        🎓
-        <span id="chat-notification" class="notification-dot"></span>
-    </button>
+    <div id="marg-chatbot-container">
+        <!-- Chat Bubble -->
+        <button id="chat-bubble" class="chat-bubble pulse" onclick="ChatBot.open()" aria-label="Open Career Chatbot">
+            🎓
+            <span id="chat-notification" class="notification-dot"></span>
+        </button>
 
-    <!-- Chat Window -->
-    <div id="chat-window" class="chat-window">
-        <!-- Header -->
-        <div class="chat-header">
-            <div class="header-left">
-                <div class="bot-avatar-header">🎓</div>
-                <div class="header-info">
-                    <span class="bot-name">Marg</span>
-                    <div class="status-wrapper">
-                        <span class="status-dot"></span>
-                        <span class="status-text">Your Career Guide • Online</span>
+        <!-- Chat Window -->
+        <div id="chat-window" class="chat-window">
+            <!-- Header -->
+            <div class="chat-header">
+                <div class="header-left">
+                    <div class="bot-avatar-header">🎓</div>
+                    <div class="header-info">
+                        <span class="bot-name">Marg</span>
+                        <div class="status-wrapper">
+                            <span class="status-dot"></span>
+                            <span class="status-text">Your Career Guide • Online</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="header-actions">
-                <button onclick="ChatBot.minimize()" title="Minimize">─</button>
-                <button onclick="ChatBot.close()" title="Close">✕</button>
-            </div>
-        </div>
-
-        <!-- Body -->
-        <div id="chat-body" class="chat-body">
-            <!-- Typing Indicator -->
-            <div id="typing-indicator" class="typing-indicator">
-                <div class="bot-avatar">🎓</div>
-                <div class="typing-bubble">
-                    <span></span><span></span><span></span>
+                <div class="header-actions">
+                    <button onclick="ChatBot.minimize()" title="Minimize">─</button>
+                    <button onclick="ChatBot.close()" title="Close">✕</button>
                 </div>
-                <small style="font-size: 10px; color: #9ca3af; margin-bottom: 5px;">Marg is typing...</small>
             </div>
-        </div>
 
-        <!-- Quick Actions Bar -->
-        <div class="quick-actions-bar">
-            <button class="quick-action-btn" onclick="ChatBot.handleQuickReply('Which stream should I choose?')">
-                <i class="fas fa-bullseye"></i>
-                <span>Streams</span>
-            </button>
-            <button class="quick-action-btn" onclick="ChatBot.handleQuickReply('What degrees are available?')">
-                <i class="fas fa-graduation-cap"></i>
-                <span>Degrees</span>
-            </button>
-            <button class="quick-action-btn" onclick="ChatBot.handleQuickReply('Show me entrance exams')">
-                <i class="fas fa-file-alt"></i>
-                <span>Exams</span>
-            </button>
-            <button class="quick-action-btn" onclick="ChatBot.handleQuickReply('Tell me about government colleges')">
-                <i class="fas fa-university"></i>
-                <span>Colleges</span>
-            </button>
-            <button class="quick-action-btn" onclick="ChatBot.handleQuickReply('Show me scholarships')">
-                <i class="fas fa-hand-holding-usd"></i>
-                <span>Scholarships</span>
-            </button>
-        </div>
+            <!-- Body -->
+            <div id="chat-body" class="chat-body">
+                <!-- Typing Indicator -->
+                <div id="typing-indicator" class="typing-indicator">
+                    <div class="bot-avatar">🎓</div>
+                    <div class="typing-bubble">
+                        <span></span><span></span><span></span>
+                    </div>
+                    <small style="font-size: 10px; color: #9ca3af; margin-bottom: 5px;">Marg is typing...</small>
+                </div>
+            </div>
 
-        <!-- Input Area -->
-        <div class="chat-input-area">
-            <input type="text" id="chat-input" class="chat-input"
-                placeholder="Ask me about JEE, NEET, CA, or Streams..." maxlength="400">
-            <button id="chat-send" class="chat-send-btn" onclick="ChatBot.sendFromInput()" disabled>
-                <i class="fas fa-paper-plane"></i>
-            </button>
+            <!-- Quick Actions Bar -->
+            <div class="quick-actions-bar">
+                <button class="quick-action-btn" onclick="ChatBot.handleQuickReply('Which stream should I choose?')">
+                    <i class="fas fa-bullseye"></i>
+                    <span>Streams</span>
+                </button>
+                <button class="quick-action-btn" onclick="ChatBot.handleQuickReply('What degrees are available?')">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Degrees</span>
+                </button>
+                <button class="quick-action-btn" onclick="ChatBot.handleQuickReply('Show me entrance exams')">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Exams</span>
+                </button>
+                <button class="quick-action-btn"
+                    onclick="ChatBot.handleQuickReply('Tell me about government colleges')">
+                    <i class="fas fa-university"></i>
+                    <span>Colleges</span>
+                </button>
+                <button class="quick-action-btn" onclick="ChatBot.handleQuickReply('Show me scholarships')">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <span>Scholarships</span>
+                </button>
+            </div>
+
+            <!-- Input Area -->
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" class="chat-input"
+                    placeholder="Ask me about JEE, NEET, CA, or Streams..." maxlength="400">
+                <button id="chat-send" class="chat-send-btn" onclick="ChatBot.sendFromInput()" disabled>
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
         </div>
     </div>
-</div>
 
-<!-- Scripts -->
-<script src="js/chatbot-knowledge.js"></script>
-<script src="js/chatbot.js"></script>
+    <!-- Scripts -->
+    <script src="js/chatbot-knowledge.js"></script>
+    <script src="js/chatbot.js"></script>
 </body>
 
 </html>
-
