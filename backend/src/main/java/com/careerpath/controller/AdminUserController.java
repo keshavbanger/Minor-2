@@ -1,4 +1,4 @@
-package com.careerpath\controller;
+package com.careerpath.controller;
 
 import com.careerpath.dto.response.UserResponse;
 import com.careerpath.model.User;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/admin/users")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
+
 public class AdminUserController {
 
     private final UserRepository userRepository;

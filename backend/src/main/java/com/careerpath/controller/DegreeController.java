@@ -10,7 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/degrees")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
+
 public class DegreeController {
 
     private final DegreeService degreeService;

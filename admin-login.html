@@ -148,7 +148,10 @@
     </div>
 
     <script>
-        const API_URL = 'http://localhost:8080/api/v1/auth/login'; // Update to your backend URL if different
+        const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+            ? 'http://localhost:8080/api/v1/auth/login'
+            : 'https://streamsmart-backend.railway.app/api/v1/auth/login';
+
 
         document.getElementById('login-form').onsubmit = async (e) => {
             e.preventDefault();

@@ -359,7 +359,10 @@
 
     <script src="js/colleges-data.js"></script>
     <script>
-        const API_BASE = 'http://localhost:8080/api/v1'; // Update to your production URL
+        const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+            ? 'http://localhost:8080/api/v1'
+            : 'https://streamsmart-backend.railway.app/api/v1';
+        // Update to your production URL
 
         function toggleView(view) {
             document.getElementById('colleges-view').style.display = view === 'colleges' ? 'block' : 'none';
