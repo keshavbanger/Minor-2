@@ -7,6 +7,7 @@ let activeCourse = 'B.Tech';
 let activeType = 'all';
 let activeState = 'all';
 let activeBtechTab = 'govt';
+let searchQuery = '';
 
 function initCollegesPage() {
     // Check for URL parameters
@@ -18,6 +19,11 @@ function initCollegesPage() {
     if (stateParam) activeState = stateParam;
 
     updateFilterUI();
+    renderAll();
+}
+
+function onSearchChange(val) {
+    searchQuery = val.toLowerCase();
     renderAll();
 }
 
@@ -75,7 +81,7 @@ function renderFeaturedBtech() {
     const section = document.getElementById('btech-featured');
     const grid = document.getElementById('featured-grid');
 
-    if (activeCourse !== 'B.Tech') {
+    if (activeCourse !== 'B.Tech' || searchQuery !== '') {
         section.style.display = 'none';
         return;
     }
@@ -91,10 +97,12 @@ function renderFeaturedBtech() {
 
 function renderMPColleges() {
     const grid = document.getElementById('mp-grid');
-    const mpColleges = COLLEGES_DATA.filter(c =>
-        c.isMP === true &&
-        (activeCourse === 'all' || c.course === activeCourse)
-    );
+    const mpColleges = COLLEGES_DATA.filter(c => {
+        const matchesCourse = activeCourse === 'all' || c.course === activeCourse;
+        const matchesSearch = c.name.toLowerCase().includes(searchQuery) ||
+            c.location.toLowerCase().includes(searchQuery);
+        return c.isMP === true && matchesCourse && matchesSearch;
+    });
 
     if (mpColleges.length === 0) {
         document.getElementById('mp-section').style.display = 'none';
@@ -113,12 +121,19 @@ function renderMainGrid() {
         const matchesType = activeType === 'all' ||
             (activeType === 'govt' ? c.isGovernment : !c.isGovernment);
         const matchesState = activeState === 'all' || c.state === activeState;
+        const matchesSearch = c.name.toLowerCase().includes(searchQuery) ||
+            c.location.toLowerCase().includes(searchQuery);
 
-        return matchesCourse && matchesType && matchesState;
+        return matchesCourse && matchesType && matchesState && matchesSearch;
     });
 
+    if (filtered.length === 0) {
+        grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 50px; color: #64748b;">No colleges found matching these filters. Try searching for something else!</div>';
+    } else {
+        grid.innerHTML = filtered.map(c => generateCollegeCard(c)).join('');
+    }
+
     summ.textContent = `Showing ${filtered.length} colleges matching your filters`;
-    grid.innerHTML = filtered.map(c => generateCollegeCard(c)).join('');
 }
 
 function generateCollegeCard(c) {

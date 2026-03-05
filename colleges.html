@@ -568,6 +568,13 @@
                     <span class="toggle-btn" id="type-private" onclick="filterByType('private')">Private</span>
                 </div>
 
+                <div class="search-box" style="position: relative; width: 300px;">
+                    <i class="fas fa-search" style="position: absolute; left: 12px; top: 12px; color: #94a3b8;"></i>
+                    <input type="text" id="search-college" placeholder="Search by name or city..."
+                        oninput="onSearchChange(this.value)"
+                        style="width: 100%; padding: 10px 15px 10px 35px; border-radius: 10px; border: 1.5px solid #e5e7eb; outline: none; transition: 0.2s;">
+                </div>
+
                 <select id="state-filter" class="state-dropdown" onchange="filterByState(this.value)">
                     <option value="all">All States</option>
                     <option value="Madhya Pradesh">Madhya Pradesh</option>
