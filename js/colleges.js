@@ -147,7 +147,7 @@ function generateCollegeCard(c) {
             <div class="card-body">
                 <div class="card-header">
                     <span class="badge-type badge-${typeClass}">${typeLabel}</span>
-                    <span class="badge-nirf">NIRF #${c.nirf}</span>
+                    <span class="badge-nirf">${c.nirf ? 'NIRF #' + c.nirf : 'Top Rated'}</span>
                 </div>
                 <h3 class="college-name">${c.name}</h3>
                 <div class="college-loc">
@@ -158,31 +158,31 @@ function generateCollegeCard(c) {
                 
                 <div class="fees-box">
                     <span class="label">ANNUAL TUITION FEES</span>
-                    <span class="fee-amount ${feeColorClass}">₹${c.fees_annual.toLocaleString()}</span>
-                    <span class="total-course">Total Course: ₹${c.fees_total.toLocaleString()}</span>
+                    <span class="fee-amount ${feeColorClass}">₹${(c.fees_annual||0).toLocaleString()}</span>
+                    <span class="total-course">Total Course: ₹${(c.fees_total||0).toLocaleString()}</span>
                 </div>
 
                 <div class="info-mini-grid">
                     <div class="info-cell">
                         <span class="label">Entrance</span>
-                        <span class="value">${c.entrance}</span>
+                        <span class="value">${c.entrance || 'N/A'}</span>
                     </div>
                     <div class="info-cell">
                         <span class="label">Duration</span>
-                        <span class="value">${c.duration}</span>
+                        <span class="value">${c.duration || 'N/A'}</span>
                     </div>
                     <div class="info-cell">
                         <span class="label">Avg Package</span>
-                        <span class="value">${c.package}</span>
+                        <span class="value">${c.package || 'N/A'}</span>
                     </div>
                     <div class="info-cell">
                         <span class="label">NAAC</span>
-                        <span class="value">${c.naac}</span>
+                        <span class="value">${c.naac || 'N/A'}</span>
                     </div>
                 </div>
 
                 <div class="highlight-tag">
-                    ${c.highlight}
+                    ${c.highlight || ''}
                 </div>
 
                 ${c.isMP ? `
@@ -196,24 +196,24 @@ function generateCollegeCard(c) {
                     
                     <div class="expanded-content" id="expand-${c.id}">
                         <div class="expand-section-title">
-                            <i class="fas fa-list-ul"></i> Popular Branches
+                            <i class="fas fa-list-ul"></i> Popular Branches / Specialties
                         </div>
                         <div class="branches-tags">
-                            ${c.extra.branches.map(b => `<span class="branch-tag">${b}</span>`).join('')}
+                            ${(c.extra?.branches || []).map(b => `<span class="branch-tag">${b}</span>`).join('')}
                         </div>
 
                         <div class="expand-section-title">
                             <i class="fas fa-gift"></i> Scholarships
                         </div>
                         <p style="font-size:12px; color:#64748b; margin-bottom:15px;">
-                            ${c.extra.scholarships.join(', ')}
+                            ${(c.extra?.scholarships || ['Merit-based']).join(', ')}
                         </p>
 
                         <div class="expand-section-title">
-                            <i class="fas fa-building"></i> Top Recruiters
+                            <i class="fas fa-building"></i> Top Recruiters / Placed At
                         </div>
                         <p style="font-size:12px; color:#64748b; margin-bottom:20px;">
-                            ${c.extra.companies.join(' • ')}
+                            ${(c.extra?.companies || ['Various']).join(' • ')}
                         </p>
 
                         <button class="view-btn" style="background:#1a3c6e; color:white;" 

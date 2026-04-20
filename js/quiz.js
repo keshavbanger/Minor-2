@@ -6,7 +6,7 @@ let quizQuestions = [];
 let questionMap = {};
 
 const ML_API = 'http://localhost:5000';
-const PROGRESS_STEPS = 12;
+const PROGRESS_STEPS = 10;
 const FIRST_QUESTION_ID = 1;
 
 const motivationalMessages = [
@@ -206,9 +206,10 @@ function renderQuestion() {
     btnBack.style.display = currentQuestionIndex === 0 ? 'none' : 'flex';
     btnNext.classList.toggle('active', userAnswers[currentQuestionId] !== undefined);
 
-    const selectedIndex = userSelections[currentQuestionId];
-    const nextQuestionId = selectedIndex !== undefined ? getNextQuestionId(q, selectedIndex) : null;
-    btnNext.innerHTML = nextQuestionId ? 'Next <i class="fas fa-arrow-right"></i>' : 'Finish Analysis <i class="fas fa-magic"></i>';
+    const isLastQuestion = currentQuestionIndex === PROGRESS_STEPS - 1;
+    btnNext.innerHTML = isLastQuestion
+        ? 'Finish Analysis <i class="fas fa-magic"></i>'
+        : 'Next <i class="fas fa-arrow-right"></i>';
 
     mottoText.textContent = motivationalMessages[Math.floor(Math.random() * motivationalMessages.length)];
 }
