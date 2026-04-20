@@ -17,5 +17,5 @@ INSERT INTO scholarships (name, description, provided_by, scholarship_type, elig
 ('Tata Trust Scholarship', 'Merit and need-based support.', 'Tata Trusts', 'MERIT', 'ALL', 'ALL', 'ALL', 60000, 'https://tatatrusts.org', 0),
 ('Reliance Foundation Scholarship', 'Support for undergraduate students.', 'Reliance Foundation', 'MERIT', 'ALL', 'GRADUATE', 'ALL', 200000, 'https://reliancefoundation.org', 0),
 ('Sitaram Jindal Scholarship', 'Need-based scholarships for students.', 'Sitaram Jindal Foundation', 'GENERAL', 'ALL', 'ALL', 'ALL', 24000, 'https://sitaramjindalfoundation.org', 0),
-('L\'Oreal India For Young Women in Science', 'Dedicated to girls pursuing science.', 'L\'Oreal India', 'GIRL_CHILD', 'SCIENCE', 'CLASS_12', 'GIRLS', 250000, 'https://loreal.com', 0),
+('L''Oreal India For Young Women in Science', 'Dedicated to girls pursuing science.', 'L''Oreal India', 'GIRL_CHILD', 'SCIENCE', 'CLASS_12', 'GIRLS', 250000, 'https://loreal.com', 0),
 ('Aga Khan Foundation Scholarship', 'For postgraduate studies abroad.', 'Aga Khan Foundation', 'MERIT', 'ALL', 'GRADUATE', 'ALL', 500000, 'https://akdn.org', 0);

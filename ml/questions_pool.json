@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "question": "If you were to build a new app, what would be its main focus?",
+    "options": [
+      {"text": "Complex algorithms and software", "value": 0},
+      {"text": "Beautiful user experience", "value": 2},
+      {"text": "Business and profit generation", "value": 3},
+      {"text": "Social impact and community", "value": 5}
+    ]
+  },
+  {
+    "id": 2,
+    "question": "Which subject in school feels most exciting to you?",
+    "options": [
+      {"text": "Physics or Chemistry", "value": 0},
+      {"text": "Biology and health", "value": 1},
+      {"text": "Economics and finance", "value": 3},
+      {"text": "Art and literature", "value": 5}
+    ]
+  },
+  {
+    "id": 3,
+    "question": "How do you prefer to solve a problem?",
+    "options": [
+      {"text": "With logic and analysis", "value": 0},
+      {"text": "By discussing with others", "value": 5},
+      {"text": "By measuring impact and numbers", "value": 3},
+      {"text": "By trying creative ideas", "value": 2}
+    ]
+  },
+  {
+    "id": 4,
+    "question": "What kind of work environment feels best?",
+    "options": [
+      {"text": "A technical lab or engineering team", "value": 0},
+      {"text": "A business office or finance team", "value": 3},
+      {"text": "A creative studio or media room", "value": 5},
+      {"text": "A research or academic setting", "value": 1}
+    ]
+  },
+  {
+    "id": 5,
+    "question": "What motivates you most in a career?",
+    "options": [
+      {"text": "Building products and systems", "value": 0},
+      {"text": "Earning money and leading business", "value": 3},
+      {"text": "Helping people and society", "value": 5},
+      {"text": "Learning new concepts and research", "value": 1}
+    ]
+  },
+  {
+    "id": 6,
+    "question": "Which task sounds most interesting?",
+    "options": [
+      {"text": "Writing code or designing systems", "value": 0},
+      {"text": "Analyzing financial data", "value": 3},
+      {"text": "Writing stories or making visual content", "value": 5},
+      {"text": "Conducting experiments and lab work", "value": 1}
+    ]
+  },
+  {
+    "id": 7,
+    "question": "How do you feel about exams like JEE, NEET or CLAT?",
+    "options": [
+      {"text": "I enjoy tough exams and maths", "value": 0},
+      {"text": "I want to serve people and health", "value": 1},
+      {"text": "I like law and debate", "value": 5},
+      {"text": "I prefer business and commerce entry", "value": 3}
+    ]
+  },
+  {
+    "id": 8,
+    "question": "Which outcome do you prefer from a project?",
+    "options": [
+      {"text": "A working tech product", "value": 0},
+      {"text": "A business plan or investment pitch", "value": 3},
+      {"text": "A creative campaign or design piece", "value": 5},
+      {"text": "A published research finding", "value": 1}
+    ]
+  },
+  {
+    "id": 9,
+    "question": "How would you describe your strongest skill?",
+    "options": [
+      {"text": "Mathematical thinking", "value": 0},
+      {"text": "Communication and empathy", "value": 5},
+      {"text": "Business strategy and numbers", "value": 3},
+      {"text": "Curiosity and research", "value": 1}
+    ]
+  },
+  {
+    "id": 10,
+    "question": "What would make you feel successful in 10 years?",
+    "options": [
+      {"text": "Leading technology innovation", "value": 0},
+      {"text": "Leading a business or finance team", "value": 3},
+      {"text": "Creating impactful art or media", "value": 5},
+      {"text": "Being a respected scholar or scientist", "value": 1}
+    ]
+  },
+  {
+    "id": 11,
+    "question": "What kind of course pace do you enjoy?",
+    "options": [
+      {"text": "Problem solving and project work", "value": 0},
+      {"text": "Structured business frameworks", "value": 3},
+      {"text": "Group activities and creative collaboration", "value": 5},
+      {"text": "Theory, experiments and analysis", "value": 1}
+    ]
+  },
+  {
+    "id": 12,
+    "question": "When you face a setback, what helps you recover fastest?",
+    "options": [
+      {"text": "Learning from the failure and iterating", "value": 0},
+      {"text": "Talking to friends and mentors", "value": 5},
+      {"text": "Adapting business strategy", "value": 3},
+      {"text": "Reviewing data and insight", "value": 1}
+    ]
+  }
+]

@@ -1,6 +1,6 @@
 /**
- * STREAMSMART: MARG CHATBOT ENGINE
- * Optimized weighted keyword matching, history persistence, and smooth UI logic.
+ * STREAMSMART: MARG AI CHATBOT ENGINE (Gemini Integration)
+ * Transitions from keyword matching to a real-time AI backend.
  */
 
 const ChatBot = {
@@ -10,6 +10,9 @@ const ChatBot = {
     messageCount: 0,
     conversationHistory: [],
     sessionStarted: false,
+
+    // Backend Configuration (Matches your Spring Boot setup)
+    apiEndpoint: '/api/v1/chatbot/message',
 
     // Elements
     elements: {},
@@ -84,7 +87,7 @@ const ChatBot = {
     async showWelcomeSequence() {
         for (const msg of WELCOME_MESSAGES) {
             this.showTyping();
-            await new Promise(r => setTimeout(r, 800));
+            await new Promise(r => setTimeout(r, 600));
             this.hideTyping();
             this.renderBotMessage(msg);
         }
@@ -105,67 +108,58 @@ const ChatBot = {
         this.handleUserMessage(text);
     },
 
+    /**
+     * CORE LOGIC: Send message to Backend AI
+     */
     async handleUserMessage(text) {
         if (this.isTyping) return;
 
+        // 1. Render User Message
         this.renderUserMessage(text);
         this.conversationHistory.push({ role: 'user', content: text, time: this.formatTime() });
         this.messageCount++;
 
+        // 2. Show Loading Animation
         this.showTyping();
-        const delay = Math.min(800 + text.length * 10, 2000);
 
-        await new Promise(r => setTimeout(r, delay));
-
-        this.hideTyping();
-        const response = this.processMessage(text);
-        this.renderBotMessage(response.message);
-
-        if (response.quickReplies && response.quickReplies.length > 0) {
-            this.renderQuickReplies(response.quickReplies);
-        }
-
-        this.conversationHistory.push({ role: 'bot', content: response.message, time: this.formatTime() });
-        this.saveHistory();
-        this.checkEngagementTriggers();
-    },
-
-    processMessage(text) {
-        const normalized = text.toLowerCase().replace(/[^\w\s]/gi, '');
-        let bestIntent = null;
-        let maxScore = 0;
-
-        CHATBOT_INTENTS.forEach(intent => {
-            let score = 0;
-            intent.keywords.forEach(kw => {
-                const kwLower = kw.toLowerCase();
-                if (normalized.includes(kwLower)) {
-                    // Weighted scoring: Multi-word keywords get 3x points
-                    const isMultiWord = kwLower.includes(' ');
-                    score += isMultiWord ? 3 : 1;
-                }
+        try {
+            // 3. Fetch from Spring Boot API
+            const response = await fetch(this.apiEndpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: text })
             });
 
-            // Normalize score by keyword count to avoid bias toward longer intents
-            const normalizedScore = score / intent.keywords.length;
-            if (normalizedScore > maxScore) {
-                maxScore = normalizedScore;
-                bestIntent = intent;
-            }
-        });
+            if (!response.ok) throw new Error('Network response was not ok');
 
-        if (bestIntent && maxScore > 0.05) {
-            return {
-                message: bestIntent.responses[Math.floor(Math.random() * bestIntent.responses.length)],
-                quickReplies: bestIntent.quickReplies
-            };
+            const data = await response.json();
+
+            // 4. Hide Typing & Render Response
+            this.hideTyping();
+
+            // Note: Support both 'reply' and 'message'
+            const botReply = data.reply || data.message || "I'm sorry, I couldn't process that.";
+
+            this.renderBotMessage(botReply);
+
+            // Handle optional quick replies from AI if available
+            if (data.quickReplies && data.quickReplies.length > 0) {
+                this.renderQuickReplies(data.quickReplies);
+            }
+
+            this.conversationHistory.push({ role: 'bot', content: botReply, time: this.formatTime() });
+            this.saveHistory();
+
+        } catch (error) {
+            console.error("ChatBot API Error:", error);
+            this.hideTyping();
+            this.renderBotMessage("I'm having a bit of trouble connecting to my brain right now. Please check your internet or try again in a moment! 🌐");
+            this.elements.sendBtn.disabled = false;
         }
 
-        // Fallback logic
-        return {
-            message: CHATBOT_FALLBACKS[Math.floor(Math.random() * CHATBOT_FALLBACKS.length)],
-            quickReplies: ["Which stream should I choose?", "Tell me about degrees", "Show me scholarships"]
-        };
+        this.checkEngagementTriggers();
     },
 
     renderUserMessage(text) {
@@ -180,12 +174,12 @@ const ChatBot = {
         const div = document.createElement('div');
         div.className = 'chat-message bot-message';
         div.innerHTML = `
-      <div class="bot-avatar">🎓</div>
-      <div class="message-content">
-        <div class="message-bubble bot-bubble">${this.formatBotText(text)}</div>
-        <div class="message-time">${this.formatTime()}</div>
-      </div>
-    `;
+            <div class="bot-avatar">🎓</div>
+            <div class="message-content">
+                <div class="message-bubble bot-bubble">${this.formatBotText(text)}</div>
+                <div class="message-time">${this.formatTime()}</div>
+            </div>
+        `;
         this.elements.body.appendChild(div);
         this.scrollBottom();
     },
@@ -217,7 +211,9 @@ const ChatBot = {
 
     scrollBottom() {
         setTimeout(() => {
-            this.elements.body.scrollTop = this.elements.body.scrollHeight;
+            if (this.elements.body) {
+                this.elements.body.scrollTop = this.elements.body.scrollHeight;
+            }
         }, 50);
     },
 
@@ -248,40 +244,24 @@ const ChatBot = {
             if (saved) {
                 this.conversationHistory = JSON.parse(saved);
                 this.conversationHistory.forEach(msg => {
-                    if (msg.role === 'user') {
-                        this.renderUserMessage(msg.content);
-                    } else {
-                        this.renderBotMessage(msg.content);
-                    }
+                    if (msg.role === 'user') this.renderUserMessage(msg.content);
+                    else this.renderBotMessage(msg.content);
                 });
                 this.sessionStarted = true;
                 this.scrollBottom();
             }
         } catch (e) {
-            console.error("History load error", e);
             localStorage.removeItem('cp_chat_history');
-        }
-    },
-
-    clearHistory() {
-        if (confirm("Clear all your conversation with Marg?")) {
-            this.conversationHistory = [];
-            localStorage.removeItem('cp_chat_history');
-            const messages = this.elements.body.querySelectorAll('.chat-message, .quick-replies');
-            messages.forEach(m => m.remove());
-            this.messageCount = 0;
-            this.sessionStarted = false;
-            this.showWelcomeSequence();
         }
     },
 
     checkEngagementTriggers() {
         const hasQuizResult = localStorage.getItem('cp_quiz_results');
-        if (this.messageCount === 3 && !hasQuizResult) {
+        if (this.messageCount === 4 && !hasQuizResult) {
             setTimeout(() => {
                 this.renderBotMessage("By the way, have you tried our Career Quiz yet? It's the most accurate way to find your perfect stream match!");
                 this.renderQuickReplies(["Start Career Quiz", "Maybe Later"]);
-            }, 2500);
+            }, 3000);
         }
     }
 };

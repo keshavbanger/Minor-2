@@ -30,13 +30,13 @@ public class PdfGeneratorService {
             document.add(title);
 
             document.add(new Paragraph("\n"));
-            document.add(new Paragraph("Student Name: " + user.fullName));
-            document.add(new Paragraph("Current Class: " + user.currentClass));
+            document.add(new Paragraph("Student Name: " + user.getFullName()));
+            document.add(new Paragraph("Current Class: " + user.getCurrentClass()));
             document.add(new Paragraph("Date Generated: " + java.time.LocalDate.now()));
 
             document.add(new Paragraph("\n"));
             document.add(new Paragraph("Recommended Path:").setBold());
-            document.add(new Paragraph("Based on your assessment, you show high aptitude for the " + user.stream + " stream."));
+            document.add(new Paragraph("Based on your assessment, you show high aptitude for the " + user.getStream() + " stream."));
 
             document.add(new Paragraph("\n"));
             document.add(new Paragraph("Next Steps:").setBold());

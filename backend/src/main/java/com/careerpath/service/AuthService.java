@@ -66,12 +66,12 @@ public class AuthService {
 
     private UserResponse mapToUserResponse(User user) {
         return UserResponse.builder()
-                .id(user.id)
-                .fullName(user.fullName)
-                .email(user.email)
-                .mobile(user.mobile)
-                .currentClass(user.currentClass.name())
-                .role(user.role.name())
+                .id(user.getId())
+                .fullName(user.getFullName())
+                .email(user.getEmail())
+                .mobile(user.getMobile())
+                .currentClass(user.getCurrentClass().name())
+                .role(user.getRole().name())
                 .build();
     }
 }

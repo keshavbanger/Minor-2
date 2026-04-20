@@ -37,6 +37,10 @@ public class QuizResult {
     @Column(name = "answers_json", columnDefinition = "TEXT")
     private String answersJson;
 
+    @Column(name = "recommended_career")
+    private String recommendedCareer;
+
     @Column(name = "taken_at")
     private LocalDateTime takenAt = LocalDateTime.now();
 }
+

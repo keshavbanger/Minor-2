@@ -1,6 +1,14 @@
-const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-    ? 'http://localhost:8080/api/v1'
-    : 'https://streamsmart-backend.railway.app/api/v1'; // REPLACE with your actual Railway URL
+const getApiBase = () => {
+    const hostname = window.location.hostname;
+    const isLocal = hostname === 'localhost' || hostname === '127.0.0.1';
+    
+    if (isLocal) {
+        return 'http://localhost:8080/api/v1';
+    }
+    return 'https://streamsmart-backend.railway.app/api/v1';
+};
+
+const API_BASE = getApiBase();
 
 
 const api = {

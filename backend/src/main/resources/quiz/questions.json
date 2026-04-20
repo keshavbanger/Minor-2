@@ -1,0 +1,125 @@
+[
+  {
+    "id": 1,
+    "question": "If you were to build a new app, what would be its main focus?",
+    "options": [
+      {"icon": "fa-code", "text": "Complex algorithms and software", "value": 0},
+      {"icon": "fa-lightbulb", "text": "Beautiful user experience", "value": 2},
+      {"icon": "fa-money-bill-wave", "text": "Business and profit generation", "value": 3},
+      {"icon": "fa-hands-helping", "text": "Social impact and community", "value": 5}
+    ]
+  },
+  {
+    "id": 2,
+    "question": "Which subject in school feels most exciting to you?",
+    "options": [
+      {"icon": "fa-atom", "text": "Physics or Chemistry", "value": 0},
+      {"icon": "fa-dna", "text": "Biology and health", "value": 1},
+      {"icon": "fa-chart-line", "text": "Economics and finance", "value": 3},
+      {"icon": "fa-paint-brush", "text": "Art and literature", "value": 5}
+    ]
+  },
+  {
+    "id": 3,
+    "question": "How do you prefer to solve a problem?",
+    "options": [
+      {"icon": "fa-brain", "text": "With logic and analysis", "value": 0, "stream": "science", "nextQuestionId": 4},
+      {"icon": "fa-users", "text": "By discussing with others", "value": 5, "stream": "arts", "nextQuestionId": 6},
+      {"icon": "fa-chart-pie", "text": "By measuring impact and numbers", "value": 3, "stream": "commerce", "nextQuestionId": 5},
+      {"icon": "fa-puzzle-piece", "text": "By trying creative ideas", "value": 2, "stream": "arts", "nextQuestionId": 6}
+    ]
+  },
+  {
+    "id": 4,
+    "question": "What kind of work environment feels best?",
+    "nextQuestionId": 7,
+    "options": [
+      {"icon": "fa-laptop-code", "text": "A technical lab or engineering team", "value": 0, "stream": "science"},
+      {"icon": "fa-handshake", "text": "A business office or finance team", "value": 3, "stream": "commerce"},
+      {"icon": "fa-paint-brush", "text": "A creative studio or media room", "value": 5, "stream": "arts"},
+      {"icon": "fa-book", "text": "A research or academic setting", "value": 1, "stream": "science"}
+    ]
+  },
+  {
+    "id": 5,
+    "question": "What motivates you most in a career?",
+    "nextQuestionId": 7,
+    "options": [
+      {"icon": "fa-robot", "text": "Building products and systems", "value": 0, "stream": "science"},
+      {"icon": "fa-hand-holding-dollar", "text": "Earning money and leading business", "value": 3, "stream": "commerce"},
+      {"icon": "fa-hands-helping", "text": "Helping people and society", "value": 5, "stream": "arts"},
+      {"icon": "fa-book-open", "text": "Learning new concepts and research", "value": 1, "stream": "science"}
+    ]
+  },
+  {
+    "id": 6,
+    "question": "Which of these tasks sounds most interesting?",
+    "nextQuestionId": 7,
+    "options": [
+      {"icon": "fa-code", "text": "Writing code or designing systems", "value": 0, "stream": "science"},
+      {"icon": "fa-chart-line", "text": "Analyzing financial data", "value": 3, "stream": "commerce"},
+      {"icon": "fa-pen-nib", "text": "Writing stories or making visual content", "value": 5, "stream": "arts"},
+      {"icon": "fa-flask", "text": "Conducting experiments and lab work", "value": 1, "stream": "science"}
+    ]
+  },
+  {
+    "id": 7,
+    "question": "How do you feel about exams like JEE, NEET or CLAT?",
+    "options": [
+      {"icon": "fa-graduation-cap", "text": "I enjoy tough exams and maths", "value": 0},
+      {"icon": "fa-heart", "text": "I want to serve people and health", "value": 1},
+      {"icon": "fa-balance-scale", "text": "I like law and debate", "value": 5},
+      {"icon": "fa-handshake", "text": "I prefer business and commerce entry", "value": 3}
+    ]
+  },
+  {
+    "id": 8,
+    "question": "Which outcome do you prefer from a project?",
+    "options": [
+      {"icon": "fa-robot", "text": "A working tech product", "value": 0},
+      {"icon": "fa-chart-line", "text": "A business plan or investment pitch", "value": 3},
+      {"icon": "fa-palette", "text": "A creative campaign or design piece", "value": 5},
+      {"icon": "fa-microscope", "text": "A published research finding", "value": 1}
+    ]
+  },
+  {
+    "id": 9,
+    "question": "How would you describe your strongest skill?",
+    "options": [
+      {"icon": "fa-calculator", "text": "Mathematical thinking", "value": 0},
+      {"icon": "fa-comments", "text": "Communication and empathy", "value": 5},
+      {"icon": "fa-coins", "text": "Business strategy and numbers", "value": 3},
+      {"icon": "fa-lightbulb", "text": "Curiosity and research", "value": 1}
+    ]
+  },
+  {
+    "id": 10,
+    "question": "What would make you feel successful in 10 years?",
+    "options": [
+      {"icon": "fa-laptop-code", "text": "Leading technology innovation", "value": 0},
+      {"icon": "fa-building-columns", "text": "Leading a business or finance team", "value": 3},
+      {"icon": "fa-lightbulb", "text": "Creating impactful art or media", "value": 5},
+      {"icon": "fa-user-graduate", "text": "Being a respected scholar or scientist", "value": 1}
+    ]
+  },
+  {
+    "id": 11,
+    "question": "What kind of course pace do you enjoy?",
+    "options": [
+      {"icon": "fa-project-diagram", "text": "Problem solving and project work", "value": 0},
+      {"icon": "fa-tasks", "text": "Structured business frameworks", "value": 3},
+      {"icon": "fa-users", "text": "Group activities and creative collaboration", "value": 5},
+      {"icon": "fa-book", "text": "Theory, experiments and analysis", "value": 1}
+    ]
+  },
+  {
+    "id": 12,
+    "question": "When you face a setback, what helps you recover fastest?",
+    "options": [
+      {"icon": "fa-brain", "text": "Learning from the failure and iterating", "value": 0},
+      {"icon": "fa-handshake", "text": "Talking to friends and mentors", "value": 5},
+      {"icon": "fa-wallet", "text": "Adapting business strategy", "value": 3},
+      {"icon": "fa-flask", "text": "Reviewing data and insight", "value": 1}
+    ]
+  }
+]

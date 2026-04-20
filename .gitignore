@@ -9,14 +9,17 @@
 *.ipr
 
 # Build
+node_modules/
 backend/target/
 frontend/node_modules/
 dist/
 build/
 
+# Data and Logs
+backend/data/
+*.log
+backend/backend_log*.txt
+
 # OS junk
 .DS_Store
 Thumbs.db
-
-# Logs
-*.log
